@@ -25,9 +25,11 @@ Option Explicit On
 Partial Public Class dsTerminal
     Inherits Global.System.Data.DataSet
     
-    Private tableTerminalReport As TerminalReportDataTable
+    Private tableTerminalReportData As TerminalReportDataDataTable
     
     Private tableTerminalBill As TerminalBillDataTable
+    
+    Private tableusystbSchTerminalDataSHEET As usystbSchTerminalDataSHEETDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -58,11 +60,14 @@ Partial Public Class dsTerminal
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
-            If (Not (ds.Tables("TerminalReport")) Is Nothing) Then
-                MyBase.Tables.Add(New TerminalReportDataTable(ds.Tables("TerminalReport")))
+            If (Not (ds.Tables("TerminalReportData")) Is Nothing) Then
+                MyBase.Tables.Add(New TerminalReportDataDataTable(ds.Tables("TerminalReportData")))
             End If
             If (Not (ds.Tables("TerminalBill")) Is Nothing) Then
                 MyBase.Tables.Add(New TerminalBillDataTable(ds.Tables("TerminalBill")))
+            End If
+            If (Not (ds.Tables("usystbSchTerminalDataSHEET")) Is Nothing) Then
+                MyBase.Tables.Add(New usystbSchTerminalDataSHEETDataTable(ds.Tables("usystbSchTerminalDataSHEET")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -85,9 +90,9 @@ Partial Public Class dsTerminal
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property TerminalReport() As TerminalReportDataTable
+    Public ReadOnly Property TerminalReportData() As TerminalReportDataDataTable
         Get
-            Return Me.tableTerminalReport
+            Return Me.tableTerminalReportData
         End Get
     End Property
     
@@ -98,6 +103,16 @@ Partial Public Class dsTerminal
     Public ReadOnly Property TerminalBill() As TerminalBillDataTable
         Get
             Return Me.tableTerminalBill
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property usystbSchTerminalDataSHEET() As usystbSchTerminalDataSHEETDataTable
+        Get
+            Return Me.tableusystbSchTerminalDataSHEET
         End Get
     End Property
     
@@ -168,11 +183,14 @@ Partial Public Class dsTerminal
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
-            If (Not (ds.Tables("TerminalReport")) Is Nothing) Then
-                MyBase.Tables.Add(New TerminalReportDataTable(ds.Tables("TerminalReport")))
+            If (Not (ds.Tables("TerminalReportData")) Is Nothing) Then
+                MyBase.Tables.Add(New TerminalReportDataDataTable(ds.Tables("TerminalReportData")))
             End If
             If (Not (ds.Tables("TerminalBill")) Is Nothing) Then
                 MyBase.Tables.Add(New TerminalBillDataTable(ds.Tables("TerminalBill")))
+            End If
+            If (Not (ds.Tables("usystbSchTerminalDataSHEET")) Is Nothing) Then
+                MyBase.Tables.Add(New usystbSchTerminalDataSHEETDataTable(ds.Tables("usystbSchTerminalDataSHEET")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -206,16 +224,22 @@ Partial Public Class dsTerminal
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
-        Me.tableTerminalReport = CType(MyBase.Tables("TerminalReport"),TerminalReportDataTable)
+        Me.tableTerminalReportData = CType(MyBase.Tables("TerminalReportData"),TerminalReportDataDataTable)
         If (initTable = true) Then
-            If (Not (Me.tableTerminalReport) Is Nothing) Then
-                Me.tableTerminalReport.InitVars
+            If (Not (Me.tableTerminalReportData) Is Nothing) Then
+                Me.tableTerminalReportData.InitVars
             End If
         End If
         Me.tableTerminalBill = CType(MyBase.Tables("TerminalBill"),TerminalBillDataTable)
         If (initTable = true) Then
             If (Not (Me.tableTerminalBill) Is Nothing) Then
                 Me.tableTerminalBill.InitVars
+            End If
+        End If
+        Me.tableusystbSchTerminalDataSHEET = CType(MyBase.Tables("usystbSchTerminalDataSHEET"),usystbSchTerminalDataSHEETDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableusystbSchTerminalDataSHEET) Is Nothing) Then
+                Me.tableusystbSchTerminalDataSHEET.InitVars
             End If
         End If
     End Sub
@@ -228,21 +252,29 @@ Partial Public Class dsTerminal
         Me.Namespace = "http://tempuri.org/dsTerminal.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
-        Me.tableTerminalReport = New TerminalReportDataTable()
-        MyBase.Tables.Add(Me.tableTerminalReport)
+        Me.tableTerminalReportData = New TerminalReportDataDataTable()
+        MyBase.Tables.Add(Me.tableTerminalReportData)
         Me.tableTerminalBill = New TerminalBillDataTable()
         MyBase.Tables.Add(Me.tableTerminalBill)
+        Me.tableusystbSchTerminalDataSHEET = New usystbSchTerminalDataSHEETDataTable()
+        MyBase.Tables.Add(Me.tableusystbSchTerminalDataSHEET)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Private Function ShouldSerializeTerminalReport() As Boolean
+    Private Function ShouldSerializeTerminalReportData() As Boolean
         Return false
     End Function
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Private Function ShouldSerializeTerminalBill() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Private Function ShouldSerializeusystbSchTerminalDataSHEET() As Boolean
         Return false
     End Function
     
@@ -305,18 +337,21 @@ Partial Public Class dsTerminal
     End Function
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Public Delegate Sub TerminalReportRowChangeEventHandler(ByVal sender As Object, ByVal e As TerminalReportRowChangeEvent)
+    Public Delegate Sub TerminalReportDataRowChangeEventHandler(ByVal sender As Object, ByVal e As TerminalReportDataRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Public Delegate Sub TerminalBillRowChangeEventHandler(ByVal sender As Object, ByVal e As TerminalBillRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Delegate Sub usystbSchTerminalDataSHEETRowChangeEventHandler(ByVal sender As Object, ByVal e As usystbSchTerminalDataSHEETRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
     '''</summary>
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class TerminalReportDataTable
-        Inherits Global.System.Data.TypedTableBase(Of TerminalReportRow)
+    Partial Public Class TerminalReportDataDataTable
+        Inherits Global.System.Data.TypedTableBase(Of TerminalReportDataRow)
         
         Private columnActualClass As Global.System.Data.DataColumn
         
@@ -410,7 +445,7 @@ Partial Public Class dsTerminal
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
             MyBase.New
-            Me.TableName = "TerminalReport"
+            Me.TableName = "TerminalReportData"
             Me.BeginInit
             Me.InitClass
             Me.EndInit
@@ -804,33 +839,33 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As TerminalReportRow
+        Public Default ReadOnly Property Item(ByVal index As Integer) As TerminalReportDataRow
             Get
-                Return CType(Me.Rows(index),TerminalReportRow)
+                Return CType(Me.Rows(index),TerminalReportDataRow)
             End Get
         End Property
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event TerminalReportRowChanging As TerminalReportRowChangeEventHandler
+        Public Event TerminalReportDataRowChanging As TerminalReportDataRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event TerminalReportRowChanged As TerminalReportRowChangeEventHandler
+        Public Event TerminalReportDataRowChanged As TerminalReportDataRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event TerminalReportRowDeleting As TerminalReportRowChangeEventHandler
+        Public Event TerminalReportDataRowDeleting As TerminalReportDataRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event TerminalReportRowDeleted As TerminalReportRowChangeEventHandler
+        Public Event TerminalReportDataRowDeleted As TerminalReportDataRowChangeEventHandler
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Sub AddTerminalReportRow(ByVal row As TerminalReportRow)
+        Public Overloads Sub AddTerminalReportDataRow(ByVal row As TerminalReportDataRow)
             Me.Rows.Add(row)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddTerminalReportRow( _
+        Public Overloads Function AddTerminalReportDataRow( _
                     ByVal ActualClass As String,  _
                     ByVal TotalScore100 As String,  _
                     ByVal PositionClass As String,  _
@@ -874,18 +909,18 @@ Partial Public Class dsTerminal
                     ByVal StudAttendDays As String,  _
                     ByVal Course As String,  _
                     ByVal ClassScore100 As String,  _
-                    ByVal ExamScore100 As String) As TerminalReportRow
-            Dim rowTerminalReportRow As TerminalReportRow = CType(Me.NewRow,TerminalReportRow)
+                    ByVal ExamScore100 As String) As TerminalReportDataRow
+            Dim rowTerminalReportDataRow As TerminalReportDataRow = CType(Me.NewRow,TerminalReportDataRow)
             Dim columnValuesArray() As Object = New Object() {ActualClass, TotalScore100, PositionClass, AdmissionNo, CandidateName, SubjectName, SubjectID, Attendance, TermID, TermName, ClassTotal, PositionSubject, SubjectRemarks, AttitudeTeachers, AttitudeChildren, Socialbility, Appearance, QualityWork, Punctuality, HomeworkSubmission, Attentiveness, Caretaking, EnglishExpression, FrenchExpression, Comportment, GradeBehavoiur, PromotionStatus, RemarksTeacher, RemarksHead, RecDate, RecTime, RecID, RecNo, AcademicYear, ClassScore30, ExamScore70, GradeSubject, ClassID, GradeRemarks, SchAttendDays, StudAttendDays, Course, ClassScore100, ExamScore100}
-            rowTerminalReportRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowTerminalReportRow)
-            Return rowTerminalReportRow
+            rowTerminalReportDataRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowTerminalReportDataRow)
+            Return rowTerminalReportDataRow
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As TerminalReportDataTable = CType(MyBase.Clone,TerminalReportDataTable)
+            Dim cln As TerminalReportDataDataTable = CType(MyBase.Clone,TerminalReportDataDataTable)
             cln.InitVars
             Return cln
         End Function
@@ -893,7 +928,7 @@ Partial Public Class dsTerminal
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New TerminalReportDataTable()
+            Return New TerminalReportDataDataTable()
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1040,28 +1075,28 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function NewTerminalReportRow() As TerminalReportRow
-            Return CType(Me.NewRow,TerminalReportRow)
+        Public Function NewTerminalReportDataRow() As TerminalReportDataRow
+            Return CType(Me.NewRow,TerminalReportDataRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New TerminalReportRow(builder)
+            Return New TerminalReportDataRow(builder)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(TerminalReportRow)
+            Return GetType(TerminalReportDataRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanged(e)
-            If (Not (Me.TerminalReportRowChangedEvent) Is Nothing) Then
-                RaiseEvent TerminalReportRowChanged(Me, New TerminalReportRowChangeEvent(CType(e.Row,TerminalReportRow), e.Action))
+            If (Not (Me.TerminalReportDataRowChangedEvent) Is Nothing) Then
+                RaiseEvent TerminalReportDataRowChanged(Me, New TerminalReportDataRowChangeEvent(CType(e.Row,TerminalReportDataRow), e.Action))
             End If
         End Sub
         
@@ -1069,8 +1104,8 @@ Partial Public Class dsTerminal
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanging(e)
-            If (Not (Me.TerminalReportRowChangingEvent) Is Nothing) Then
-                RaiseEvent TerminalReportRowChanging(Me, New TerminalReportRowChangeEvent(CType(e.Row,TerminalReportRow), e.Action))
+            If (Not (Me.TerminalReportDataRowChangingEvent) Is Nothing) Then
+                RaiseEvent TerminalReportDataRowChanging(Me, New TerminalReportDataRowChangeEvent(CType(e.Row,TerminalReportDataRow), e.Action))
             End If
         End Sub
         
@@ -1078,8 +1113,8 @@ Partial Public Class dsTerminal
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleted(e)
-            If (Not (Me.TerminalReportRowDeletedEvent) Is Nothing) Then
-                RaiseEvent TerminalReportRowDeleted(Me, New TerminalReportRowChangeEvent(CType(e.Row,TerminalReportRow), e.Action))
+            If (Not (Me.TerminalReportDataRowDeletedEvent) Is Nothing) Then
+                RaiseEvent TerminalReportDataRowDeleted(Me, New TerminalReportDataRowChangeEvent(CType(e.Row,TerminalReportDataRow), e.Action))
             End If
         End Sub
         
@@ -1087,14 +1122,14 @@ Partial Public Class dsTerminal
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleting(e)
-            If (Not (Me.TerminalReportRowDeletingEvent) Is Nothing) Then
-                RaiseEvent TerminalReportRowDeleting(Me, New TerminalReportRowChangeEvent(CType(e.Row,TerminalReportRow), e.Action))
+            If (Not (Me.TerminalReportDataRowDeletingEvent) Is Nothing) Then
+                RaiseEvent TerminalReportDataRowDeleting(Me, New TerminalReportDataRowChangeEvent(CType(e.Row,TerminalReportDataRow), e.Action))
             End If
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub RemoveTerminalReportRow(ByVal row As TerminalReportRow)
+        Public Sub RemoveTerminalReportDataRow(ByVal row As TerminalReportDataRow)
             Me.Rows.Remove(row)
         End Sub
         
@@ -1121,7 +1156,7 @@ Partial Public Class dsTerminal
             type.Attributes.Add(attribute1)
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "TerminalReportDataTable"
+            attribute2.FixedValue = "TerminalReportDataDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -2181,18 +2216,1083 @@ Partial Public Class dsTerminal
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class usystbSchTerminalDataSHEETDataTable
+        Inherits Global.System.Data.TypedTableBase(Of usystbSchTerminalDataSHEETRow)
+        
+        Private columnClassScore30 As Global.System.Data.DataColumn
+        
+        Private columnExamScore70 As Global.System.Data.DataColumn
+        
+        Private columnTotalScore100 As Global.System.Data.DataColumn
+        
+        Private columnStudRawScores As Global.System.Data.DataColumn
+        
+        Private columnClassScore100 As Global.System.Data.DataColumn
+        
+        Private columnExamScore100 As Global.System.Data.DataColumn
+        
+        Private columnMaxRawScores As Global.System.Data.DataColumn
+        
+        Private columnPositionScored As Global.System.Data.DataColumn
+        
+        Private columnSubjectName As Global.System.Data.DataColumn
+        
+        Private columnSubjectID As Global.System.Data.DataColumn
+        
+        Private columnAdmissionNo As Global.System.Data.DataColumn
+        
+        Private columnCandidateName As Global.System.Data.DataColumn
+        
+        Private columnCourse As Global.System.Data.DataColumn
+        
+        Private columnActualClass As Global.System.Data.DataColumn
+        
+        Private columnClassID As Global.System.Data.DataColumn
+        
+        Private columnPositionClass As Global.System.Data.DataColumn
+        
+        Private columnAttendance As Global.System.Data.DataColumn
+        
+        Private columnTermID As Global.System.Data.DataColumn
+        
+        Private columnTermName As Global.System.Data.DataColumn
+        
+        Private columnClassTotal As Global.System.Data.DataColumn
+        
+        Private columnPositionSubject As Global.System.Data.DataColumn
+        
+        Private columnSubjectRemarks As Global.System.Data.DataColumn
+        
+        Private columnAttitudeTeachers As Global.System.Data.DataColumn
+        
+        Private columnAttitudeChildren As Global.System.Data.DataColumn
+        
+        Private columnSocialbility As Global.System.Data.DataColumn
+        
+        Private columnAppearance As Global.System.Data.DataColumn
+        
+        Private columnQualityWork As Global.System.Data.DataColumn
+        
+        Private columnPunctuality As Global.System.Data.DataColumn
+        
+        Private columnHomeworkSubmission As Global.System.Data.DataColumn
+        
+        Private columnAttentiveness As Global.System.Data.DataColumn
+        
+        Private columnCaretaking As Global.System.Data.DataColumn
+        
+        Private columnEnglishExpression As Global.System.Data.DataColumn
+        
+        Private columnFrenchExpression As Global.System.Data.DataColumn
+        
+        Private columnComportment As Global.System.Data.DataColumn
+        
+        Private columnGradeBehavoiur As Global.System.Data.DataColumn
+        
+        Private columnPromotionStatus As Global.System.Data.DataColumn
+        
+        Private columnRemarksTeacher As Global.System.Data.DataColumn
+        
+        Private columnRemarksHead As Global.System.Data.DataColumn
+        
+        Private columnRecDate As Global.System.Data.DataColumn
+        
+        Private columnRecTime As Global.System.Data.DataColumn
+        
+        Private columnRecID As Global.System.Data.DataColumn
+        
+        Private columnRecNo As Global.System.Data.DataColumn
+        
+        Private columnAcademicYear As Global.System.Data.DataColumn
+        
+        Private columnGradeSubject As Global.System.Data.DataColumn
+        
+        Private columnGradeRemarks As Global.System.Data.DataColumn
+        
+        Private columnClassSubjectCode As Global.System.Data.DataColumn
+        
+        Private columnSchTermDays As Global.System.Data.DataColumn
+        
+        Private columnStudAttendDays As Global.System.Data.DataColumn
+        
+        Private columnPhotoSource As Global.System.Data.DataColumn
+        
+        Private columnClassSubjectID As Global.System.Data.DataColumn
+        
+        Private columnPositionClassDesc As Global.System.Data.DataColumn
+        
+        Private columnStudSubjectID As Global.System.Data.DataColumn
+        
+        Private columnPositionSubjectDesc As Global.System.Data.DataColumn
+        
+        Private columnReOpenDATE As Global.System.Data.DataColumn
+        
+        Private columnConduct As Global.System.Data.DataColumn
+        
+        Private columnAttitude As Global.System.Data.DataColumn
+        
+        Private columnInterest As Global.System.Data.DataColumn
+        
+        Private columnTeacherREM As Global.System.Data.DataColumn
+        
+        Private columnPromotion As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "usystbSchTerminalDataSHEET"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ClassScore30Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnClassScore30
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ExamScore70Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnExamScore70
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TotalScore100Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTotalScore100
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property StudRawScoresColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnStudRawScores
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ClassScore100Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnClassScore100
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ExamScore100Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnExamScore100
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property MaxRawScoresColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMaxRawScores
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PositionScoredColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPositionScored
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SubjectNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSubjectName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SubjectIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSubjectID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AdmissionNoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAdmissionNo
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property CandidateNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCandidateName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property CourseColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCourse
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ActualClassColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnActualClass
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ClassIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnClassID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PositionClassColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPositionClass
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AttendanceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAttendance
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TermIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTermID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TermNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTermName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ClassTotalColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnClassTotal
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PositionSubjectColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPositionSubject
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SubjectRemarksColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSubjectRemarks
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AttitudeTeachersColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAttitudeTeachers
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AttitudeChildrenColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAttitudeChildren
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SocialbilityColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSocialbility
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AppearanceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAppearance
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property QualityWorkColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnQualityWork
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PunctualityColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPunctuality
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property HomeworkSubmissionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHomeworkSubmission
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AttentivenessColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAttentiveness
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property CaretakingColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCaretaking
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property EnglishExpressionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEnglishExpression
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property FrenchExpressionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFrenchExpression
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ComportmentColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnComportment
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property GradeBehavoiurColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGradeBehavoiur
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PromotionStatusColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPromotionStatus
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property RemarksTeacherColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRemarksTeacher
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property RemarksHeadColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRemarksHead
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property RecDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property RecTimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecTime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property RecIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property RecNoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecNo
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AcademicYearColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAcademicYear
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property GradeSubjectColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGradeSubject
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property GradeRemarksColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGradeRemarks
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ClassSubjectCodeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnClassSubjectCode
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SchTermDaysColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSchTermDays
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property StudAttendDaysColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnStudAttendDays
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PhotoSourceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPhotoSource
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ClassSubjectIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnClassSubjectID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PositionClassDescColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPositionClassDesc
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property StudSubjectIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnStudSubjectID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PositionSubjectDescColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPositionSubjectDesc
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ReOpenDATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnReOpenDATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ConductColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnConduct
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property AttitudeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAttitude
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property InterestColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnInterest
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TeacherREMColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTeacherREM
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property PromotionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPromotion
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As usystbSchTerminalDataSHEETRow
+            Get
+                Return CType(Me.Rows(index),usystbSchTerminalDataSHEETRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event usystbSchTerminalDataSHEETRowChanging As usystbSchTerminalDataSHEETRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event usystbSchTerminalDataSHEETRowChanged As usystbSchTerminalDataSHEETRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event usystbSchTerminalDataSHEETRowDeleting As usystbSchTerminalDataSHEETRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event usystbSchTerminalDataSHEETRowDeleted As usystbSchTerminalDataSHEETRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Sub AddusystbSchTerminalDataSHEETRow(ByVal row As usystbSchTerminalDataSHEETRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Function AddusystbSchTerminalDataSHEETRow( _
+                    ByVal ClassScore30 As String,  _
+                    ByVal ExamScore70 As String,  _
+                    ByVal TotalScore100 As String,  _
+                    ByVal StudRawScores As String,  _
+                    ByVal ClassScore100 As String,  _
+                    ByVal ExamScore100 As String,  _
+                    ByVal MaxRawScores As String,  _
+                    ByVal PositionScored As String,  _
+                    ByVal SubjectName As String,  _
+                    ByVal SubjectID As String,  _
+                    ByVal AdmissionNo As String,  _
+                    ByVal CandidateName As String,  _
+                    ByVal Course As String,  _
+                    ByVal ActualClass As String,  _
+                    ByVal ClassID As String,  _
+                    ByVal PositionClass As String,  _
+                    ByVal Attendance As String,  _
+                    ByVal TermID As String,  _
+                    ByVal TermName As String,  _
+                    ByVal ClassTotal As String,  _
+                    ByVal PositionSubject As String,  _
+                    ByVal SubjectRemarks As String,  _
+                    ByVal AttitudeTeachers As String,  _
+                    ByVal AttitudeChildren As String,  _
+                    ByVal Socialbility As String,  _
+                    ByVal Appearance As String,  _
+                    ByVal QualityWork As String,  _
+                    ByVal Punctuality As String,  _
+                    ByVal HomeworkSubmission As String,  _
+                    ByVal Attentiveness As String,  _
+                    ByVal Caretaking As String,  _
+                    ByVal EnglishExpression As String,  _
+                    ByVal FrenchExpression As String,  _
+                    ByVal Comportment As String,  _
+                    ByVal GradeBehavoiur As String,  _
+                    ByVal PromotionStatus As String,  _
+                    ByVal RemarksTeacher As String,  _
+                    ByVal RemarksHead As String,  _
+                    ByVal RecDate As String,  _
+                    ByVal RecTime As String,  _
+                    ByVal RecID As String,  _
+                    ByVal RecNo As String,  _
+                    ByVal AcademicYear As String,  _
+                    ByVal GradeSubject As String,  _
+                    ByVal GradeRemarks As String,  _
+                    ByVal ClassSubjectCode As String,  _
+                    ByVal SchTermDays As String,  _
+                    ByVal StudAttendDays As String,  _
+                    ByVal PhotoSource As String,  _
+                    ByVal ClassSubjectID As String,  _
+                    ByVal PositionClassDesc As String,  _
+                    ByVal StudSubjectID As String,  _
+                    ByVal PositionSubjectDesc As String,  _
+                    ByVal ReOpenDATE As String,  _
+                    ByVal Conduct As String,  _
+                    ByVal Attitude As String,  _
+                    ByVal Interest As String,  _
+                    ByVal TeacherREM As String,  _
+                    ByVal Promotion As String) As usystbSchTerminalDataSHEETRow
+            Dim rowusystbSchTerminalDataSHEETRow As usystbSchTerminalDataSHEETRow = CType(Me.NewRow,usystbSchTerminalDataSHEETRow)
+            Dim columnValuesArray() As Object = New Object() {ClassScore30, ExamScore70, TotalScore100, StudRawScores, ClassScore100, ExamScore100, MaxRawScores, PositionScored, SubjectName, SubjectID, AdmissionNo, CandidateName, Course, ActualClass, ClassID, PositionClass, Attendance, TermID, TermName, ClassTotal, PositionSubject, SubjectRemarks, AttitudeTeachers, AttitudeChildren, Socialbility, Appearance, QualityWork, Punctuality, HomeworkSubmission, Attentiveness, Caretaking, EnglishExpression, FrenchExpression, Comportment, GradeBehavoiur, PromotionStatus, RemarksTeacher, RemarksHead, RecDate, RecTime, RecID, RecNo, AcademicYear, GradeSubject, GradeRemarks, ClassSubjectCode, SchTermDays, StudAttendDays, PhotoSource, ClassSubjectID, PositionClassDesc, StudSubjectID, PositionSubjectDesc, ReOpenDATE, Conduct, Attitude, Interest, TeacherREM, Promotion}
+            rowusystbSchTerminalDataSHEETRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowusystbSchTerminalDataSHEETRow)
+            Return rowusystbSchTerminalDataSHEETRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As usystbSchTerminalDataSHEETDataTable = CType(MyBase.Clone,usystbSchTerminalDataSHEETDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New usystbSchTerminalDataSHEETDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnClassScore30 = MyBase.Columns("ClassScore30")
+            Me.columnExamScore70 = MyBase.Columns("ExamScore70")
+            Me.columnTotalScore100 = MyBase.Columns("TotalScore100")
+            Me.columnStudRawScores = MyBase.Columns("StudRawScores")
+            Me.columnClassScore100 = MyBase.Columns("ClassScore100")
+            Me.columnExamScore100 = MyBase.Columns("ExamScore100")
+            Me.columnMaxRawScores = MyBase.Columns("MaxRawScores")
+            Me.columnPositionScored = MyBase.Columns("PositionScored")
+            Me.columnSubjectName = MyBase.Columns("SubjectName")
+            Me.columnSubjectID = MyBase.Columns("SubjectID")
+            Me.columnAdmissionNo = MyBase.Columns("AdmissionNo")
+            Me.columnCandidateName = MyBase.Columns("CandidateName")
+            Me.columnCourse = MyBase.Columns("Course")
+            Me.columnActualClass = MyBase.Columns("ActualClass")
+            Me.columnClassID = MyBase.Columns("ClassID")
+            Me.columnPositionClass = MyBase.Columns("PositionClass")
+            Me.columnAttendance = MyBase.Columns("Attendance")
+            Me.columnTermID = MyBase.Columns("TermID")
+            Me.columnTermName = MyBase.Columns("TermName")
+            Me.columnClassTotal = MyBase.Columns("ClassTotal")
+            Me.columnPositionSubject = MyBase.Columns("PositionSubject")
+            Me.columnSubjectRemarks = MyBase.Columns("SubjectRemarks")
+            Me.columnAttitudeTeachers = MyBase.Columns("AttitudeTeachers")
+            Me.columnAttitudeChildren = MyBase.Columns("AttitudeChildren")
+            Me.columnSocialbility = MyBase.Columns("Socialbility")
+            Me.columnAppearance = MyBase.Columns("Appearance")
+            Me.columnQualityWork = MyBase.Columns("QualityWork")
+            Me.columnPunctuality = MyBase.Columns("Punctuality")
+            Me.columnHomeworkSubmission = MyBase.Columns("HomeworkSubmission")
+            Me.columnAttentiveness = MyBase.Columns("Attentiveness")
+            Me.columnCaretaking = MyBase.Columns("Caretaking")
+            Me.columnEnglishExpression = MyBase.Columns("EnglishExpression")
+            Me.columnFrenchExpression = MyBase.Columns("FrenchExpression")
+            Me.columnComportment = MyBase.Columns("Comportment")
+            Me.columnGradeBehavoiur = MyBase.Columns("GradeBehavoiur")
+            Me.columnPromotionStatus = MyBase.Columns("PromotionStatus")
+            Me.columnRemarksTeacher = MyBase.Columns("RemarksTeacher")
+            Me.columnRemarksHead = MyBase.Columns("RemarksHead")
+            Me.columnRecDate = MyBase.Columns("RecDate")
+            Me.columnRecTime = MyBase.Columns("RecTime")
+            Me.columnRecID = MyBase.Columns("RecID")
+            Me.columnRecNo = MyBase.Columns("RecNo")
+            Me.columnAcademicYear = MyBase.Columns("AcademicYear")
+            Me.columnGradeSubject = MyBase.Columns("GradeSubject")
+            Me.columnGradeRemarks = MyBase.Columns("GradeRemarks")
+            Me.columnClassSubjectCode = MyBase.Columns("ClassSubjectCode")
+            Me.columnSchTermDays = MyBase.Columns("SchTermDays")
+            Me.columnStudAttendDays = MyBase.Columns("StudAttendDays")
+            Me.columnPhotoSource = MyBase.Columns("PhotoSource")
+            Me.columnClassSubjectID = MyBase.Columns("ClassSubjectID")
+            Me.columnPositionClassDesc = MyBase.Columns("PositionClassDesc")
+            Me.columnStudSubjectID = MyBase.Columns("StudSubjectID")
+            Me.columnPositionSubjectDesc = MyBase.Columns("PositionSubjectDesc")
+            Me.columnReOpenDATE = MyBase.Columns("ReOpenDATE")
+            Me.columnConduct = MyBase.Columns("Conduct")
+            Me.columnAttitude = MyBase.Columns("Attitude")
+            Me.columnInterest = MyBase.Columns("Interest")
+            Me.columnTeacherREM = MyBase.Columns("TeacherREM")
+            Me.columnPromotion = MyBase.Columns("Promotion")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnClassScore30 = New Global.System.Data.DataColumn("ClassScore30", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnClassScore30)
+            Me.columnExamScore70 = New Global.System.Data.DataColumn("ExamScore70", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnExamScore70)
+            Me.columnTotalScore100 = New Global.System.Data.DataColumn("TotalScore100", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTotalScore100)
+            Me.columnStudRawScores = New Global.System.Data.DataColumn("StudRawScores", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnStudRawScores)
+            Me.columnClassScore100 = New Global.System.Data.DataColumn("ClassScore100", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnClassScore100)
+            Me.columnExamScore100 = New Global.System.Data.DataColumn("ExamScore100", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnExamScore100)
+            Me.columnMaxRawScores = New Global.System.Data.DataColumn("MaxRawScores", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnMaxRawScores)
+            Me.columnPositionScored = New Global.System.Data.DataColumn("PositionScored", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPositionScored)
+            Me.columnSubjectName = New Global.System.Data.DataColumn("SubjectName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSubjectName)
+            Me.columnSubjectID = New Global.System.Data.DataColumn("SubjectID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSubjectID)
+            Me.columnAdmissionNo = New Global.System.Data.DataColumn("AdmissionNo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAdmissionNo)
+            Me.columnCandidateName = New Global.System.Data.DataColumn("CandidateName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCandidateName)
+            Me.columnCourse = New Global.System.Data.DataColumn("Course", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCourse)
+            Me.columnActualClass = New Global.System.Data.DataColumn("ActualClass", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnActualClass)
+            Me.columnClassID = New Global.System.Data.DataColumn("ClassID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnClassID)
+            Me.columnPositionClass = New Global.System.Data.DataColumn("PositionClass", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPositionClass)
+            Me.columnAttendance = New Global.System.Data.DataColumn("Attendance", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAttendance)
+            Me.columnTermID = New Global.System.Data.DataColumn("TermID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTermID)
+            Me.columnTermName = New Global.System.Data.DataColumn("TermName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTermName)
+            Me.columnClassTotal = New Global.System.Data.DataColumn("ClassTotal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnClassTotal)
+            Me.columnPositionSubject = New Global.System.Data.DataColumn("PositionSubject", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPositionSubject)
+            Me.columnSubjectRemarks = New Global.System.Data.DataColumn("SubjectRemarks", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSubjectRemarks)
+            Me.columnAttitudeTeachers = New Global.System.Data.DataColumn("AttitudeTeachers", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAttitudeTeachers)
+            Me.columnAttitudeChildren = New Global.System.Data.DataColumn("AttitudeChildren", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAttitudeChildren)
+            Me.columnSocialbility = New Global.System.Data.DataColumn("Socialbility", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSocialbility)
+            Me.columnAppearance = New Global.System.Data.DataColumn("Appearance", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAppearance)
+            Me.columnQualityWork = New Global.System.Data.DataColumn("QualityWork", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnQualityWork)
+            Me.columnPunctuality = New Global.System.Data.DataColumn("Punctuality", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPunctuality)
+            Me.columnHomeworkSubmission = New Global.System.Data.DataColumn("HomeworkSubmission", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHomeworkSubmission)
+            Me.columnAttentiveness = New Global.System.Data.DataColumn("Attentiveness", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAttentiveness)
+            Me.columnCaretaking = New Global.System.Data.DataColumn("Caretaking", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCaretaking)
+            Me.columnEnglishExpression = New Global.System.Data.DataColumn("EnglishExpression", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEnglishExpression)
+            Me.columnFrenchExpression = New Global.System.Data.DataColumn("FrenchExpression", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFrenchExpression)
+            Me.columnComportment = New Global.System.Data.DataColumn("Comportment", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnComportment)
+            Me.columnGradeBehavoiur = New Global.System.Data.DataColumn("GradeBehavoiur", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnGradeBehavoiur)
+            Me.columnPromotionStatus = New Global.System.Data.DataColumn("PromotionStatus", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPromotionStatus)
+            Me.columnRemarksTeacher = New Global.System.Data.DataColumn("RemarksTeacher", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRemarksTeacher)
+            Me.columnRemarksHead = New Global.System.Data.DataColumn("RemarksHead", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRemarksHead)
+            Me.columnRecDate = New Global.System.Data.DataColumn("RecDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecDate)
+            Me.columnRecTime = New Global.System.Data.DataColumn("RecTime", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecTime)
+            Me.columnRecID = New Global.System.Data.DataColumn("RecID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecID)
+            Me.columnRecNo = New Global.System.Data.DataColumn("RecNo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecNo)
+            Me.columnAcademicYear = New Global.System.Data.DataColumn("AcademicYear", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAcademicYear)
+            Me.columnGradeSubject = New Global.System.Data.DataColumn("GradeSubject", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnGradeSubject)
+            Me.columnGradeRemarks = New Global.System.Data.DataColumn("GradeRemarks", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnGradeRemarks)
+            Me.columnClassSubjectCode = New Global.System.Data.DataColumn("ClassSubjectCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnClassSubjectCode)
+            Me.columnSchTermDays = New Global.System.Data.DataColumn("SchTermDays", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSchTermDays)
+            Me.columnStudAttendDays = New Global.System.Data.DataColumn("StudAttendDays", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnStudAttendDays)
+            Me.columnPhotoSource = New Global.System.Data.DataColumn("PhotoSource", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPhotoSource)
+            Me.columnClassSubjectID = New Global.System.Data.DataColumn("ClassSubjectID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnClassSubjectID)
+            Me.columnPositionClassDesc = New Global.System.Data.DataColumn("PositionClassDesc", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPositionClassDesc)
+            Me.columnStudSubjectID = New Global.System.Data.DataColumn("StudSubjectID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnStudSubjectID)
+            Me.columnPositionSubjectDesc = New Global.System.Data.DataColumn("PositionSubjectDesc", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPositionSubjectDesc)
+            Me.columnReOpenDATE = New Global.System.Data.DataColumn("ReOpenDATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnReOpenDATE)
+            Me.columnConduct = New Global.System.Data.DataColumn("Conduct", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnConduct)
+            Me.columnAttitude = New Global.System.Data.DataColumn("Attitude", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAttitude)
+            Me.columnInterest = New Global.System.Data.DataColumn("Interest", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnInterest)
+            Me.columnTeacherREM = New Global.System.Data.DataColumn("TeacherREM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTeacherREM)
+            Me.columnPromotion = New Global.System.Data.DataColumn("Promotion", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPromotion)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function NewusystbSchTerminalDataSHEETRow() As usystbSchTerminalDataSHEETRow
+            Return CType(Me.NewRow,usystbSchTerminalDataSHEETRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New usystbSchTerminalDataSHEETRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(usystbSchTerminalDataSHEETRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.usystbSchTerminalDataSHEETRowChangedEvent) Is Nothing) Then
+                RaiseEvent usystbSchTerminalDataSHEETRowChanged(Me, New usystbSchTerminalDataSHEETRowChangeEvent(CType(e.Row,usystbSchTerminalDataSHEETRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.usystbSchTerminalDataSHEETRowChangingEvent) Is Nothing) Then
+                RaiseEvent usystbSchTerminalDataSHEETRowChanging(Me, New usystbSchTerminalDataSHEETRowChangeEvent(CType(e.Row,usystbSchTerminalDataSHEETRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.usystbSchTerminalDataSHEETRowDeletedEvent) Is Nothing) Then
+                RaiseEvent usystbSchTerminalDataSHEETRowDeleted(Me, New usystbSchTerminalDataSHEETRowChangeEvent(CType(e.Row,usystbSchTerminalDataSHEETRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.usystbSchTerminalDataSHEETRowDeletingEvent) Is Nothing) Then
+                RaiseEvent usystbSchTerminalDataSHEETRowDeleting(Me, New usystbSchTerminalDataSHEETRowChangeEvent(CType(e.Row,usystbSchTerminalDataSHEETRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub RemoveusystbSchTerminalDataSHEETRow(ByVal row As usystbSchTerminalDataSHEETRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As dsTerminal = New dsTerminal()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "usystbSchTerminalDataSHEETDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
-    Partial Public Class TerminalReportRow
+    Partial Public Class TerminalReportDataRow
         Inherits Global.System.Data.DataRow
         
-        Private tableTerminalReport As TerminalReportDataTable
+        Private tableTerminalReportData As TerminalReportDataDataTable
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableTerminalReport = CType(Me.Table,TerminalReportDataTable)
+            Me.tableTerminalReportData = CType(Me.Table,TerminalReportDataDataTable)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2200,13 +3300,13 @@ Partial Public Class dsTerminal
         Public Property ActualClass() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ActualClassColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.ActualClassColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ActualClass' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ActualClass' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ActualClassColumn) = value
+                Me(Me.tableTerminalReportData.ActualClassColumn) = value
             End Set
         End Property
         
@@ -2215,13 +3315,13 @@ Partial Public Class dsTerminal
         Public Property TotalScore100() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.TotalScore100Column),String)
+                    Return CType(Me(Me.tableTerminalReportData.TotalScore100Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TotalScore100' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TotalScore100' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.TotalScore100Column) = value
+                Me(Me.tableTerminalReportData.TotalScore100Column) = value
             End Set
         End Property
         
@@ -2230,13 +3330,13 @@ Partial Public Class dsTerminal
         Public Property PositionClass() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.PositionClassColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.PositionClassColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionClass' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionClass' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.PositionClassColumn) = value
+                Me(Me.tableTerminalReportData.PositionClassColumn) = value
             End Set
         End Property
         
@@ -2245,13 +3345,13 @@ Partial Public Class dsTerminal
         Public Property AdmissionNo() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.AdmissionNoColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.AdmissionNoColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'AdmissionNo' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AdmissionNo' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.AdmissionNoColumn) = value
+                Me(Me.tableTerminalReportData.AdmissionNoColumn) = value
             End Set
         End Property
         
@@ -2260,13 +3360,13 @@ Partial Public Class dsTerminal
         Public Property CandidateName() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.CandidateNameColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.CandidateNameColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CandidateName' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CandidateName' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.CandidateNameColumn) = value
+                Me(Me.tableTerminalReportData.CandidateNameColumn) = value
             End Set
         End Property
         
@@ -2275,13 +3375,13 @@ Partial Public Class dsTerminal
         Public Property SubjectName() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.SubjectNameColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.SubjectNameColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectName' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectName' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.SubjectNameColumn) = value
+                Me(Me.tableTerminalReportData.SubjectNameColumn) = value
             End Set
         End Property
         
@@ -2290,13 +3390,13 @@ Partial Public Class dsTerminal
         Public Property SubjectID() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.SubjectIDColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.SubjectIDColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectID' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectID' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.SubjectIDColumn) = value
+                Me(Me.tableTerminalReportData.SubjectIDColumn) = value
             End Set
         End Property
         
@@ -2305,13 +3405,13 @@ Partial Public Class dsTerminal
         Public Property Attendance() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.AttendanceColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.AttendanceColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Attendance' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Attendance' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.AttendanceColumn) = value
+                Me(Me.tableTerminalReportData.AttendanceColumn) = value
             End Set
         End Property
         
@@ -2320,13 +3420,13 @@ Partial Public Class dsTerminal
         Public Property TermID() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.TermIDColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.TermIDColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TermID' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TermID' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.TermIDColumn) = value
+                Me(Me.tableTerminalReportData.TermIDColumn) = value
             End Set
         End Property
         
@@ -2335,13 +3435,13 @@ Partial Public Class dsTerminal
         Public Property TermName() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.TermNameColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.TermNameColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TermName' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TermName' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.TermNameColumn) = value
+                Me(Me.tableTerminalReportData.TermNameColumn) = value
             End Set
         End Property
         
@@ -2350,13 +3450,13 @@ Partial Public Class dsTerminal
         Public Property ClassTotal() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ClassTotalColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.ClassTotalColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassTotal' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassTotal' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ClassTotalColumn) = value
+                Me(Me.tableTerminalReportData.ClassTotalColumn) = value
             End Set
         End Property
         
@@ -2365,13 +3465,13 @@ Partial Public Class dsTerminal
         Public Property PositionSubject() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.PositionSubjectColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.PositionSubjectColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionSubject' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionSubject' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.PositionSubjectColumn) = value
+                Me(Me.tableTerminalReportData.PositionSubjectColumn) = value
             End Set
         End Property
         
@@ -2380,13 +3480,13 @@ Partial Public Class dsTerminal
         Public Property SubjectRemarks() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.SubjectRemarksColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.SubjectRemarksColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectRemarks' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectRemarks' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.SubjectRemarksColumn) = value
+                Me(Me.tableTerminalReportData.SubjectRemarksColumn) = value
             End Set
         End Property
         
@@ -2395,13 +3495,13 @@ Partial Public Class dsTerminal
         Public Property AttitudeTeachers() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.AttitudeTeachersColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.AttitudeTeachersColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'AttitudeTeachers' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AttitudeTeachers' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.AttitudeTeachersColumn) = value
+                Me(Me.tableTerminalReportData.AttitudeTeachersColumn) = value
             End Set
         End Property
         
@@ -2410,13 +3510,13 @@ Partial Public Class dsTerminal
         Public Property AttitudeChildren() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.AttitudeChildrenColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.AttitudeChildrenColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'AttitudeChildren' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AttitudeChildren' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.AttitudeChildrenColumn) = value
+                Me(Me.tableTerminalReportData.AttitudeChildrenColumn) = value
             End Set
         End Property
         
@@ -2425,13 +3525,13 @@ Partial Public Class dsTerminal
         Public Property Socialbility() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.SocialbilityColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.SocialbilityColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Socialbility' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Socialbility' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.SocialbilityColumn) = value
+                Me(Me.tableTerminalReportData.SocialbilityColumn) = value
             End Set
         End Property
         
@@ -2440,13 +3540,13 @@ Partial Public Class dsTerminal
         Public Property Appearance() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.AppearanceColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.AppearanceColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Appearance' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Appearance' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.AppearanceColumn) = value
+                Me(Me.tableTerminalReportData.AppearanceColumn) = value
             End Set
         End Property
         
@@ -2455,13 +3555,13 @@ Partial Public Class dsTerminal
         Public Property QualityWork() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.QualityWorkColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.QualityWorkColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'QualityWork' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'QualityWork' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.QualityWorkColumn) = value
+                Me(Me.tableTerminalReportData.QualityWorkColumn) = value
             End Set
         End Property
         
@@ -2470,13 +3570,13 @@ Partial Public Class dsTerminal
         Public Property Punctuality() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.PunctualityColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.PunctualityColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Punctuality' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Punctuality' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.PunctualityColumn) = value
+                Me(Me.tableTerminalReportData.PunctualityColumn) = value
             End Set
         End Property
         
@@ -2485,13 +3585,14 @@ Partial Public Class dsTerminal
         Public Property HomeworkSubmission() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.HomeworkSubmissionColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.HomeworkSubmissionColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'HomeworkSubmission' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'HomeworkSubmission' in table 'TerminalReportData' is DBNull"& _ 
+                            ".", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.HomeworkSubmissionColumn) = value
+                Me(Me.tableTerminalReportData.HomeworkSubmissionColumn) = value
             End Set
         End Property
         
@@ -2500,13 +3601,13 @@ Partial Public Class dsTerminal
         Public Property Attentiveness() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.AttentivenessColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.AttentivenessColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Attentiveness' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Attentiveness' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.AttentivenessColumn) = value
+                Me(Me.tableTerminalReportData.AttentivenessColumn) = value
             End Set
         End Property
         
@@ -2515,13 +3616,13 @@ Partial Public Class dsTerminal
         Public Property Caretaking() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.CaretakingColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.CaretakingColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Caretaking' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Caretaking' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.CaretakingColumn) = value
+                Me(Me.tableTerminalReportData.CaretakingColumn) = value
             End Set
         End Property
         
@@ -2530,13 +3631,14 @@ Partial Public Class dsTerminal
         Public Property EnglishExpression() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.EnglishExpressionColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.EnglishExpressionColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'EnglishExpression' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'EnglishExpression' in table 'TerminalReportData' is DBNull."& _ 
+                            "", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.EnglishExpressionColumn) = value
+                Me(Me.tableTerminalReportData.EnglishExpressionColumn) = value
             End Set
         End Property
         
@@ -2545,13 +3647,13 @@ Partial Public Class dsTerminal
         Public Property FrenchExpression() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.FrenchExpressionColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.FrenchExpressionColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'FrenchExpression' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'FrenchExpression' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.FrenchExpressionColumn) = value
+                Me(Me.tableTerminalReportData.FrenchExpressionColumn) = value
             End Set
         End Property
         
@@ -2560,13 +3662,13 @@ Partial Public Class dsTerminal
         Public Property Comportment() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ComportmentColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.ComportmentColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Comportment' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Comportment' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ComportmentColumn) = value
+                Me(Me.tableTerminalReportData.ComportmentColumn) = value
             End Set
         End Property
         
@@ -2575,13 +3677,13 @@ Partial Public Class dsTerminal
         Public Property GradeBehavoiur() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.GradeBehavoiurColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.GradeBehavoiurColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeBehavoiur' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeBehavoiur' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.GradeBehavoiurColumn) = value
+                Me(Me.tableTerminalReportData.GradeBehavoiurColumn) = value
             End Set
         End Property
         
@@ -2590,13 +3692,13 @@ Partial Public Class dsTerminal
         Public Property PromotionStatus() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.PromotionStatusColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.PromotionStatusColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'PromotionStatus' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PromotionStatus' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.PromotionStatusColumn) = value
+                Me(Me.tableTerminalReportData.PromotionStatusColumn) = value
             End Set
         End Property
         
@@ -2605,13 +3707,13 @@ Partial Public Class dsTerminal
         Public Property RemarksTeacher() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.RemarksTeacherColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.RemarksTeacherColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RemarksTeacher' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RemarksTeacher' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.RemarksTeacherColumn) = value
+                Me(Me.tableTerminalReportData.RemarksTeacherColumn) = value
             End Set
         End Property
         
@@ -2620,13 +3722,13 @@ Partial Public Class dsTerminal
         Public Property RemarksHead() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.RemarksHeadColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.RemarksHeadColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RemarksHead' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RemarksHead' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.RemarksHeadColumn) = value
+                Me(Me.tableTerminalReportData.RemarksHeadColumn) = value
             End Set
         End Property
         
@@ -2635,13 +3737,13 @@ Partial Public Class dsTerminal
         Public Property RecDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.RecDateColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.RecDateColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecDate' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecDate' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.RecDateColumn) = value
+                Me(Me.tableTerminalReportData.RecDateColumn) = value
             End Set
         End Property
         
@@ -2650,13 +3752,13 @@ Partial Public Class dsTerminal
         Public Property RecTime() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.RecTimeColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.RecTimeColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecTime' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecTime' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.RecTimeColumn) = value
+                Me(Me.tableTerminalReportData.RecTimeColumn) = value
             End Set
         End Property
         
@@ -2665,13 +3767,13 @@ Partial Public Class dsTerminal
         Public Property RecID() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.RecIDColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.RecIDColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecID' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecID' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.RecIDColumn) = value
+                Me(Me.tableTerminalReportData.RecIDColumn) = value
             End Set
         End Property
         
@@ -2680,13 +3782,13 @@ Partial Public Class dsTerminal
         Public Property RecNo() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.RecNoColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.RecNoColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecNo' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecNo' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.RecNoColumn) = value
+                Me(Me.tableTerminalReportData.RecNoColumn) = value
             End Set
         End Property
         
@@ -2695,13 +3797,13 @@ Partial Public Class dsTerminal
         Public Property AcademicYear() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.AcademicYearColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.AcademicYearColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'AcademicYear' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AcademicYear' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.AcademicYearColumn) = value
+                Me(Me.tableTerminalReportData.AcademicYearColumn) = value
             End Set
         End Property
         
@@ -2710,13 +3812,13 @@ Partial Public Class dsTerminal
         Public Property ClassScore30() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ClassScore30Column),String)
+                    Return CType(Me(Me.tableTerminalReportData.ClassScore30Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassScore30' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassScore30' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ClassScore30Column) = value
+                Me(Me.tableTerminalReportData.ClassScore30Column) = value
             End Set
         End Property
         
@@ -2725,13 +3827,13 @@ Partial Public Class dsTerminal
         Public Property ExamScore70() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ExamScore70Column),String)
+                    Return CType(Me(Me.tableTerminalReportData.ExamScore70Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ExamScore70' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ExamScore70' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ExamScore70Column) = value
+                Me(Me.tableTerminalReportData.ExamScore70Column) = value
             End Set
         End Property
         
@@ -2740,13 +3842,13 @@ Partial Public Class dsTerminal
         Public Property GradeSubject() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.GradeSubjectColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.GradeSubjectColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeSubject' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeSubject' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.GradeSubjectColumn) = value
+                Me(Me.tableTerminalReportData.GradeSubjectColumn) = value
             End Set
         End Property
         
@@ -2755,13 +3857,13 @@ Partial Public Class dsTerminal
         Public Property ClassID() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ClassIDColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.ClassIDColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassID' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassID' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ClassIDColumn) = value
+                Me(Me.tableTerminalReportData.ClassIDColumn) = value
             End Set
         End Property
         
@@ -2770,13 +3872,13 @@ Partial Public Class dsTerminal
         Public Property GradeRemarks() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.GradeRemarksColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.GradeRemarksColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeRemarks' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeRemarks' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.GradeRemarksColumn) = value
+                Me(Me.tableTerminalReportData.GradeRemarksColumn) = value
             End Set
         End Property
         
@@ -2785,13 +3887,13 @@ Partial Public Class dsTerminal
         Public Property SchAttendDays() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.SchAttendDaysColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.SchAttendDaysColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'SchAttendDays' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SchAttendDays' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.SchAttendDaysColumn) = value
+                Me(Me.tableTerminalReportData.SchAttendDaysColumn) = value
             End Set
         End Property
         
@@ -2800,13 +3902,13 @@ Partial Public Class dsTerminal
         Public Property StudAttendDays() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.StudAttendDaysColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.StudAttendDaysColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'StudAttendDays' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'StudAttendDays' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.StudAttendDaysColumn) = value
+                Me(Me.tableTerminalReportData.StudAttendDaysColumn) = value
             End Set
         End Property
         
@@ -2815,13 +3917,13 @@ Partial Public Class dsTerminal
         Public Property Course() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.CourseColumn),String)
+                    Return CType(Me(Me.tableTerminalReportData.CourseColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Course' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Course' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.CourseColumn) = value
+                Me(Me.tableTerminalReportData.CourseColumn) = value
             End Set
         End Property
         
@@ -2830,13 +3932,13 @@ Partial Public Class dsTerminal
         Public Property ClassScore100() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ClassScore100Column),String)
+                    Return CType(Me(Me.tableTerminalReportData.ClassScore100Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassScore100' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassScore100' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ClassScore100Column) = value
+                Me(Me.tableTerminalReportData.ClassScore100Column) = value
             End Set
         End Property
         
@@ -2845,542 +3947,542 @@ Partial Public Class dsTerminal
         Public Property ExamScore100() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalReport.ExamScore100Column),String)
+                    Return CType(Me(Me.tableTerminalReportData.ExamScore100Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ExamScore100' in table 'TerminalReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ExamScore100' in table 'TerminalReportData' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTerminalReport.ExamScore100Column) = value
+                Me(Me.tableTerminalReportData.ExamScore100Column) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsActualClassNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ActualClassColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.ActualClassColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetActualClassNull()
-            Me(Me.tableTerminalReport.ActualClassColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ActualClassColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsTotalScore100Null() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.TotalScore100Column)
+            Return Me.IsNull(Me.tableTerminalReportData.TotalScore100Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetTotalScore100Null()
-            Me(Me.tableTerminalReport.TotalScore100Column) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.TotalScore100Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsPositionClassNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.PositionClassColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.PositionClassColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetPositionClassNull()
-            Me(Me.tableTerminalReport.PositionClassColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.PositionClassColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAdmissionNoNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.AdmissionNoColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.AdmissionNoColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAdmissionNoNull()
-            Me(Me.tableTerminalReport.AdmissionNoColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.AdmissionNoColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsCandidateNameNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.CandidateNameColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.CandidateNameColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetCandidateNameNull()
-            Me(Me.tableTerminalReport.CandidateNameColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.CandidateNameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsSubjectNameNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.SubjectNameColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.SubjectNameColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetSubjectNameNull()
-            Me(Me.tableTerminalReport.SubjectNameColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.SubjectNameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsSubjectIDNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.SubjectIDColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.SubjectIDColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetSubjectIDNull()
-            Me(Me.tableTerminalReport.SubjectIDColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.SubjectIDColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAttendanceNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.AttendanceColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.AttendanceColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAttendanceNull()
-            Me(Me.tableTerminalReport.AttendanceColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.AttendanceColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsTermIDNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.TermIDColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.TermIDColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetTermIDNull()
-            Me(Me.tableTerminalReport.TermIDColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.TermIDColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsTermNameNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.TermNameColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.TermNameColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetTermNameNull()
-            Me(Me.tableTerminalReport.TermNameColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.TermNameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsClassTotalNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ClassTotalColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.ClassTotalColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetClassTotalNull()
-            Me(Me.tableTerminalReport.ClassTotalColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ClassTotalColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsPositionSubjectNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.PositionSubjectColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.PositionSubjectColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetPositionSubjectNull()
-            Me(Me.tableTerminalReport.PositionSubjectColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.PositionSubjectColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsSubjectRemarksNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.SubjectRemarksColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.SubjectRemarksColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetSubjectRemarksNull()
-            Me(Me.tableTerminalReport.SubjectRemarksColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.SubjectRemarksColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAttitudeTeachersNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.AttitudeTeachersColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.AttitudeTeachersColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAttitudeTeachersNull()
-            Me(Me.tableTerminalReport.AttitudeTeachersColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.AttitudeTeachersColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAttitudeChildrenNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.AttitudeChildrenColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.AttitudeChildrenColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAttitudeChildrenNull()
-            Me(Me.tableTerminalReport.AttitudeChildrenColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.AttitudeChildrenColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsSocialbilityNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.SocialbilityColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.SocialbilityColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetSocialbilityNull()
-            Me(Me.tableTerminalReport.SocialbilityColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.SocialbilityColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAppearanceNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.AppearanceColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.AppearanceColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAppearanceNull()
-            Me(Me.tableTerminalReport.AppearanceColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.AppearanceColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsQualityWorkNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.QualityWorkColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.QualityWorkColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetQualityWorkNull()
-            Me(Me.tableTerminalReport.QualityWorkColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.QualityWorkColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsPunctualityNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.PunctualityColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.PunctualityColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetPunctualityNull()
-            Me(Me.tableTerminalReport.PunctualityColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.PunctualityColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsHomeworkSubmissionNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.HomeworkSubmissionColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.HomeworkSubmissionColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetHomeworkSubmissionNull()
-            Me(Me.tableTerminalReport.HomeworkSubmissionColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.HomeworkSubmissionColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAttentivenessNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.AttentivenessColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.AttentivenessColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAttentivenessNull()
-            Me(Me.tableTerminalReport.AttentivenessColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.AttentivenessColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsCaretakingNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.CaretakingColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.CaretakingColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetCaretakingNull()
-            Me(Me.tableTerminalReport.CaretakingColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.CaretakingColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsEnglishExpressionNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.EnglishExpressionColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.EnglishExpressionColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetEnglishExpressionNull()
-            Me(Me.tableTerminalReport.EnglishExpressionColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.EnglishExpressionColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsFrenchExpressionNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.FrenchExpressionColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.FrenchExpressionColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetFrenchExpressionNull()
-            Me(Me.tableTerminalReport.FrenchExpressionColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.FrenchExpressionColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsComportmentNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ComportmentColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.ComportmentColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetComportmentNull()
-            Me(Me.tableTerminalReport.ComportmentColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ComportmentColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsGradeBehavoiurNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.GradeBehavoiurColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.GradeBehavoiurColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetGradeBehavoiurNull()
-            Me(Me.tableTerminalReport.GradeBehavoiurColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.GradeBehavoiurColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsPromotionStatusNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.PromotionStatusColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.PromotionStatusColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetPromotionStatusNull()
-            Me(Me.tableTerminalReport.PromotionStatusColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.PromotionStatusColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsRemarksTeacherNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.RemarksTeacherColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.RemarksTeacherColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetRemarksTeacherNull()
-            Me(Me.tableTerminalReport.RemarksTeacherColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.RemarksTeacherColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsRemarksHeadNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.RemarksHeadColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.RemarksHeadColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetRemarksHeadNull()
-            Me(Me.tableTerminalReport.RemarksHeadColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.RemarksHeadColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsRecDateNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.RecDateColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.RecDateColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetRecDateNull()
-            Me(Me.tableTerminalReport.RecDateColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.RecDateColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsRecTimeNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.RecTimeColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.RecTimeColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetRecTimeNull()
-            Me(Me.tableTerminalReport.RecTimeColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.RecTimeColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsRecIDNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.RecIDColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.RecIDColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetRecIDNull()
-            Me(Me.tableTerminalReport.RecIDColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.RecIDColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsRecNoNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.RecNoColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.RecNoColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetRecNoNull()
-            Me(Me.tableTerminalReport.RecNoColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.RecNoColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAcademicYearNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.AcademicYearColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.AcademicYearColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAcademicYearNull()
-            Me(Me.tableTerminalReport.AcademicYearColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.AcademicYearColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsClassScore30Null() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ClassScore30Column)
+            Return Me.IsNull(Me.tableTerminalReportData.ClassScore30Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetClassScore30Null()
-            Me(Me.tableTerminalReport.ClassScore30Column) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ClassScore30Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsExamScore70Null() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ExamScore70Column)
+            Return Me.IsNull(Me.tableTerminalReportData.ExamScore70Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetExamScore70Null()
-            Me(Me.tableTerminalReport.ExamScore70Column) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ExamScore70Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsGradeSubjectNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.GradeSubjectColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.GradeSubjectColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetGradeSubjectNull()
-            Me(Me.tableTerminalReport.GradeSubjectColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.GradeSubjectColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsClassIDNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ClassIDColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.ClassIDColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetClassIDNull()
-            Me(Me.tableTerminalReport.ClassIDColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ClassIDColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsGradeRemarksNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.GradeRemarksColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.GradeRemarksColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetGradeRemarksNull()
-            Me(Me.tableTerminalReport.GradeRemarksColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.GradeRemarksColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsSchAttendDaysNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.SchAttendDaysColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.SchAttendDaysColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetSchAttendDaysNull()
-            Me(Me.tableTerminalReport.SchAttendDaysColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.SchAttendDaysColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsStudAttendDaysNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.StudAttendDaysColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.StudAttendDaysColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetStudAttendDaysNull()
-            Me(Me.tableTerminalReport.StudAttendDaysColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.StudAttendDaysColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsCourseNull() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.CourseColumn)
+            Return Me.IsNull(Me.tableTerminalReportData.CourseColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetCourseNull()
-            Me(Me.tableTerminalReport.CourseColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.CourseColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsClassScore100Null() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ClassScore100Column)
+            Return Me.IsNull(Me.tableTerminalReportData.ClassScore100Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetClassScore100Null()
-            Me(Me.tableTerminalReport.ClassScore100Column) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ClassScore100Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsExamScore100Null() As Boolean
-            Return Me.IsNull(Me.tableTerminalReport.ExamScore100Column)
+            Return Me.IsNull(Me.tableTerminalReportData.ExamScore100Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetExamScore100Null()
-            Me(Me.tableTerminalReport.ExamScore100Column) = Global.System.Convert.DBNull
+            Me(Me.tableTerminalReportData.ExamScore100Column) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -4886,19 +5988,1676 @@ Partial Public Class dsTerminal
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class usystbSchTerminalDataSHEETRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableusystbSchTerminalDataSHEET As usystbSchTerminalDataSHEETDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableusystbSchTerminalDataSHEET = CType(Me.Table,usystbSchTerminalDataSHEETDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClassScore30() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ClassScore30Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassScore30' in table 'usystbSchTerminalDataSHEET' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ClassScore30Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ExamScore70() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ExamScore70Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ExamScore70' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ExamScore70Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property TotalScore100() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.TotalScore100Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TotalScore100' in table 'usystbSchTerminalDataSHEET' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.TotalScore100Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property StudRawScores() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.StudRawScoresColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'StudRawScores' in table 'usystbSchTerminalDataSHEET' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.StudRawScoresColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClassScore100() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ClassScore100Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassScore100' in table 'usystbSchTerminalDataSHEET' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ClassScore100Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ExamScore100() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ExamScore100Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ExamScore100' in table 'usystbSchTerminalDataSHEET' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ExamScore100Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property MaxRawScores() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.MaxRawScoresColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'MaxRawScores' in table 'usystbSchTerminalDataSHEET' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.MaxRawScoresColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property PositionScored() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PositionScoredColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionScored' in table 'usystbSchTerminalDataSHEET' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PositionScoredColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property SubjectName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.SubjectNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectName' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.SubjectNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property SubjectID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.SubjectIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectID' in table 'usystbSchTerminalDataSHEET' is DBNull."& _ 
+                            "", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.SubjectIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property AdmissionNo() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AdmissionNoColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AdmissionNo' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AdmissionNoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property CandidateName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.CandidateNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CandidateName' in table 'usystbSchTerminalDataSHEET' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.CandidateNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Course() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.CourseColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Course' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.CourseColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ActualClass() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ActualClassColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ActualClass' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ActualClassColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClassID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ClassIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassID' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ClassIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property PositionClass() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PositionClassColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionClass' in table 'usystbSchTerminalDataSHEET' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PositionClassColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Attendance() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AttendanceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Attendance' in table 'usystbSchTerminalDataSHEET' is DBNull"& _ 
+                            ".", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AttendanceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property TermID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.TermIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TermID' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.TermIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property TermName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.TermNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TermName' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.TermNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClassTotal() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ClassTotalColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassTotal' in table 'usystbSchTerminalDataSHEET' is DBNull"& _ 
+                            ".", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ClassTotalColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property PositionSubject() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PositionSubjectColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionSubject' in table 'usystbSchTerminalDataSHEET' is D"& _ 
+                            "BNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PositionSubjectColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property SubjectRemarks() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.SubjectRemarksColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SubjectRemarks' in table 'usystbSchTerminalDataSHEET' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.SubjectRemarksColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property AttitudeTeachers() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AttitudeTeachersColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AttitudeTeachers' in table 'usystbSchTerminalDataSHEET' is "& _ 
+                            "DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AttitudeTeachersColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property AttitudeChildren() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AttitudeChildrenColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AttitudeChildren' in table 'usystbSchTerminalDataSHEET' is "& _ 
+                            "DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AttitudeChildrenColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Socialbility() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.SocialbilityColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Socialbility' in table 'usystbSchTerminalDataSHEET' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.SocialbilityColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Appearance() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AppearanceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Appearance' in table 'usystbSchTerminalDataSHEET' is DBNull"& _ 
+                            ".", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AppearanceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property QualityWork() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.QualityWorkColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'QualityWork' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.QualityWorkColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Punctuality() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PunctualityColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Punctuality' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PunctualityColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property HomeworkSubmission() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.HomeworkSubmissionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'HomeworkSubmission' in table 'usystbSchTerminalDataSHEET' i"& _ 
+                            "s DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.HomeworkSubmissionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Attentiveness() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AttentivenessColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Attentiveness' in table 'usystbSchTerminalDataSHEET' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AttentivenessColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Caretaking() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.CaretakingColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Caretaking' in table 'usystbSchTerminalDataSHEET' is DBNull"& _ 
+                            ".", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.CaretakingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property EnglishExpression() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.EnglishExpressionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'EnglishExpression' in table 'usystbSchTerminalDataSHEET' is"& _ 
+                            " DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.EnglishExpressionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property FrenchExpression() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.FrenchExpressionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'FrenchExpression' in table 'usystbSchTerminalDataSHEET' is "& _ 
+                            "DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.FrenchExpressionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Comportment() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ComportmentColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Comportment' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ComportmentColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property GradeBehavoiur() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.GradeBehavoiurColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeBehavoiur' in table 'usystbSchTerminalDataSHEET' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.GradeBehavoiurColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property PromotionStatus() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PromotionStatusColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PromotionStatus' in table 'usystbSchTerminalDataSHEET' is D"& _ 
+                            "BNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PromotionStatusColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property RemarksTeacher() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.RemarksTeacherColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RemarksTeacher' in table 'usystbSchTerminalDataSHEET' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.RemarksTeacherColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property RemarksHead() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.RemarksHeadColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RemarksHead' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.RemarksHeadColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property RecDate() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.RecDateColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecDate' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.RecDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property RecTime() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.RecTimeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecTime' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.RecTimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property RecID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.RecIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecID' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.RecIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property RecNo() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.RecNoColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecNo' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.RecNoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property AcademicYear() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AcademicYearColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AcademicYear' in table 'usystbSchTerminalDataSHEET' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AcademicYearColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property GradeSubject() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.GradeSubjectColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeSubject' in table 'usystbSchTerminalDataSHEET' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.GradeSubjectColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property GradeRemarks() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.GradeRemarksColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GradeRemarks' in table 'usystbSchTerminalDataSHEET' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.GradeRemarksColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClassSubjectCode() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ClassSubjectCodeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassSubjectCode' in table 'usystbSchTerminalDataSHEET' is "& _ 
+                            "DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ClassSubjectCodeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property SchTermDays() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.SchTermDaysColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SchTermDays' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.SchTermDaysColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property StudAttendDays() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.StudAttendDaysColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'StudAttendDays' in table 'usystbSchTerminalDataSHEET' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.StudAttendDaysColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property PhotoSource() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PhotoSourceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PhotoSource' in table 'usystbSchTerminalDataSHEET' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PhotoSourceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClassSubjectID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ClassSubjectIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ClassSubjectID' in table 'usystbSchTerminalDataSHEET' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ClassSubjectIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property PositionClassDesc() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PositionClassDescColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionClassDesc' in table 'usystbSchTerminalDataSHEET' is"& _ 
+                            " DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PositionClassDescColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property StudSubjectID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.StudSubjectIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'StudSubjectID' in table 'usystbSchTerminalDataSHEET' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.StudSubjectIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property PositionSubjectDesc() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PositionSubjectDescColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionSubjectDesc' in table 'usystbSchTerminalDataSHEET' "& _ 
+                            "is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PositionSubjectDescColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ReOpenDATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ReOpenDATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ReOpenDATE' in table 'usystbSchTerminalDataSHEET' is DBNull"& _ 
+                            ".", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ReOpenDATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Conduct() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.ConductColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Conduct' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.ConductColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Attitude() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.AttitudeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Attitude' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.AttitudeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Interest() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.InterestColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Interest' in table 'usystbSchTerminalDataSHEET' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.InterestColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property TeacherREM() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.TeacherREMColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TeacherREM' in table 'usystbSchTerminalDataSHEET' is DBNull"& _ 
+                            ".", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.TeacherREMColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Promotion() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableusystbSchTerminalDataSHEET.PromotionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Promotion' in table 'usystbSchTerminalDataSHEET' is DBNull."& _ 
+                            "", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableusystbSchTerminalDataSHEET.PromotionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsClassScore30Null() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ClassScore30Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetClassScore30Null()
+            Me(Me.tableusystbSchTerminalDataSHEET.ClassScore30Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsExamScore70Null() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ExamScore70Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetExamScore70Null()
+            Me(Me.tableusystbSchTerminalDataSHEET.ExamScore70Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsTotalScore100Null() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.TotalScore100Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetTotalScore100Null()
+            Me(Me.tableusystbSchTerminalDataSHEET.TotalScore100Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsStudRawScoresNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.StudRawScoresColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetStudRawScoresNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.StudRawScoresColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsClassScore100Null() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ClassScore100Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetClassScore100Null()
+            Me(Me.tableusystbSchTerminalDataSHEET.ClassScore100Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsExamScore100Null() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ExamScore100Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetExamScore100Null()
+            Me(Me.tableusystbSchTerminalDataSHEET.ExamScore100Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsMaxRawScoresNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.MaxRawScoresColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetMaxRawScoresNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.MaxRawScoresColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPositionScoredNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PositionScoredColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPositionScoredNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PositionScoredColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSubjectNameNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.SubjectNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSubjectNameNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.SubjectNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSubjectIDNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.SubjectIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSubjectIDNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.SubjectIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAdmissionNoNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AdmissionNoColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAdmissionNoNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AdmissionNoColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsCandidateNameNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.CandidateNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetCandidateNameNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.CandidateNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsCourseNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.CourseColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetCourseNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.CourseColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsActualClassNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ActualClassColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetActualClassNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ActualClassColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsClassIDNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ClassIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetClassIDNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ClassIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPositionClassNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PositionClassColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPositionClassNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PositionClassColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAttendanceNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AttendanceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAttendanceNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AttendanceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsTermIDNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.TermIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetTermIDNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.TermIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsTermNameNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.TermNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetTermNameNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.TermNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsClassTotalNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ClassTotalColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetClassTotalNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ClassTotalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPositionSubjectNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PositionSubjectColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPositionSubjectNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PositionSubjectColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSubjectRemarksNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.SubjectRemarksColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSubjectRemarksNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.SubjectRemarksColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAttitudeTeachersNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AttitudeTeachersColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAttitudeTeachersNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AttitudeTeachersColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAttitudeChildrenNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AttitudeChildrenColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAttitudeChildrenNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AttitudeChildrenColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSocialbilityNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.SocialbilityColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSocialbilityNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.SocialbilityColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAppearanceNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AppearanceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAppearanceNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AppearanceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsQualityWorkNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.QualityWorkColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetQualityWorkNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.QualityWorkColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPunctualityNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PunctualityColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPunctualityNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PunctualityColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsHomeworkSubmissionNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.HomeworkSubmissionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetHomeworkSubmissionNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.HomeworkSubmissionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAttentivenessNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AttentivenessColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAttentivenessNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AttentivenessColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsCaretakingNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.CaretakingColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetCaretakingNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.CaretakingColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsEnglishExpressionNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.EnglishExpressionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetEnglishExpressionNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.EnglishExpressionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsFrenchExpressionNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.FrenchExpressionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetFrenchExpressionNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.FrenchExpressionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsComportmentNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ComportmentColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetComportmentNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ComportmentColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsGradeBehavoiurNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.GradeBehavoiurColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetGradeBehavoiurNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.GradeBehavoiurColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPromotionStatusNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PromotionStatusColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPromotionStatusNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PromotionStatusColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsRemarksTeacherNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.RemarksTeacherColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetRemarksTeacherNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.RemarksTeacherColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsRemarksHeadNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.RemarksHeadColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetRemarksHeadNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.RemarksHeadColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsRecDateNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.RecDateColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetRecDateNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.RecDateColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsRecTimeNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.RecTimeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetRecTimeNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.RecTimeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsRecIDNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.RecIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetRecIDNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.RecIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsRecNoNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.RecNoColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetRecNoNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.RecNoColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAcademicYearNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AcademicYearColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAcademicYearNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AcademicYearColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsGradeSubjectNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.GradeSubjectColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetGradeSubjectNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.GradeSubjectColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsGradeRemarksNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.GradeRemarksColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetGradeRemarksNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.GradeRemarksColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsClassSubjectCodeNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ClassSubjectCodeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetClassSubjectCodeNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ClassSubjectCodeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSchTermDaysNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.SchTermDaysColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSchTermDaysNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.SchTermDaysColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsStudAttendDaysNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.StudAttendDaysColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetStudAttendDaysNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.StudAttendDaysColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPhotoSourceNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PhotoSourceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPhotoSourceNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PhotoSourceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsClassSubjectIDNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ClassSubjectIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetClassSubjectIDNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ClassSubjectIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPositionClassDescNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PositionClassDescColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPositionClassDescNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PositionClassDescColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsStudSubjectIDNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.StudSubjectIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetStudSubjectIDNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.StudSubjectIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPositionSubjectDescNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PositionSubjectDescColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPositionSubjectDescNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PositionSubjectDescColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsReOpenDATENull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ReOpenDATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetReOpenDATENull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ReOpenDATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsConductNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.ConductColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetConductNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.ConductColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsAttitudeNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.AttitudeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetAttitudeNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.AttitudeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsInterestNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.InterestColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetInterestNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.InterestColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsTeacherREMNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.TeacherREMColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetTeacherREMNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.TeacherREMColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsPromotionNull() As Boolean
+            Return Me.IsNull(Me.tableusystbSchTerminalDataSHEET.PromotionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetPromotionNull()
+            Me(Me.tableusystbSchTerminalDataSHEET.PromotionColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Public Class TerminalReportRowChangeEvent
+    Public Class TerminalReportDataRowChangeEvent
         Inherits Global.System.EventArgs
         
-        Private eventRow As TerminalReportRow
+        Private eventRow As TerminalReportDataRow
         
         Private eventAction As Global.System.Data.DataRowAction
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub New(ByVal row As TerminalReportRow, ByVal action As Global.System.Data.DataRowAction)
+        Public Sub New(ByVal row As TerminalReportDataRow, ByVal action As Global.System.Data.DataRowAction)
             MyBase.New
             Me.eventRow = row
             Me.eventAction = action
@@ -4906,7 +7665,7 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Row() As TerminalReportRow
+        Public ReadOnly Property Row() As TerminalReportDataRow
             Get
                 Return Me.eventRow
             End Get
@@ -4943,6 +7702,42 @@ Partial Public Class dsTerminal
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public ReadOnly Property Row() As TerminalBillRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Class usystbSchTerminalDataSHEETRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As usystbSchTerminalDataSHEETRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New(ByVal row As usystbSchTerminalDataSHEETRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Row() As usystbSchTerminalDataSHEETRow
             Get
                 Return Me.eventRow
             End Get

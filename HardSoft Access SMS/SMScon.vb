@@ -1,6 +1,6 @@
 ﻿Imports System.Data.OleDb
 Module SMScon
-    Public path = "K:\Daakye\Terminal Bills_SemesterRUN.mdb"
+    Public path = "K:\Users\KISSI\Desktop\CLASS 2A.mdb"
 
     Public Function SMSConnection() As OleDbConnection
 

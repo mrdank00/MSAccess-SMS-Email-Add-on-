@@ -38,37 +38,62 @@ Public Class Main
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim query = "select * from usystbSchTERMINALREPORTdata "
-        cmd = New OleDb.OleDbCommand(query, con)
-        dt.Tables("TerminalReport").Rows.Clear()
-        da.SelectCommand = cmd
-        da.Fill(dt, "TerminalReport")
+
+        Try
+            If con.State = ConnectionState.Closed Then
+                con.Open()
+            End If
+            'email=39
+            Dim query = "SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,EmailAddress FROM usystbSchAdmissionDATA "
+            'where Emailaddress<>'" + "" + "' 
+            cmd = New OleDb.OleDbCommand(query, con)
+            da = New OleDb.OleDbDataAdapter(cmd)
+            tbl = New DataTable()
+            da.Fill(tbl)
+            ' con.Close()
+
+            For k = 0 To tbl.Rows.Count - 1
+
+                cmd = New OleDb.OleDbCommand("select * from usystbSchTerminalDataSHEET where admissionno='" + tbl.Rows(k)(0).ToString + "' ", con)
+                dt.Tables("usystbSchTerminalDataSHEET").Rows.Clear()
+                da.SelectCommand = cmd
+                da.Fill(dt, "usystbSchTerminalDataSHEET")
 
 
-        'Dim sql = "select * from ClientReg"
-        'dt.Tables("ClientReg").Rows.Clear()
-        'cmd = New SqlCommand(sql, FleetCon)
-        'da.SelectCommand = cmd
-        'da.Fill(dt, "ClientReg")
+                'Dim sql = "select * from ClientReg"
+                'dt.Tables("ClientReg").Rows.Clear()
+                'cmd = New SqlCommand(sql, FleetCon)
+                'da.SelectCommand = cmd
+                'da.Fill(dt, "ClientReg")
 
-        Dim report As New rptTerminalReport
-        report.SetDataSource(dt)
-        CrystalReportViewer1.ReportSource = report
-        CrystalReportViewer1.Refresh()
+                Dim report As New rptTerminalReport
+                report.SetDataSource(dt)
+                CrystalReportViewer1.ReportSource = report
+                CrystalReportViewer1.Refresh()
 
-        'Dim CrExportOptions As ExportOptions
-        'Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
-        'Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions
-        'CrDiskFileDestinationOptions.DiskFileName = pdfFile
-        'CrExportOptions = report.ExportOptions
-        'With CrExportOptions
-        '    .ExportDestinationType = ExportDestinationType.DiskFile
-        '    .ExportFormatType = ExportFormatType.PortableDocFormat
-        '    .DestinationOptions = CrDiskFileDestinationOptions
-        '    .FormatOptions = CrFormatTypeOptions
-        'End With
-        'report.Export()
-        'sendMail()
+                Dim pdfFile As String = "K:\Users\KISSI\Desktop\" + tbl.Rows(k)(1).ToString + " " + "Terminal Report" + ".pdf"
+
+                Dim CrExportOptions As ExportOptions
+                Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
+                Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions
+                CrDiskFileDestinationOptions.DiskFileName = pdfFile
+                CrExportOptions = report.ExportOptions
+                With CrExportOptions
+                    .ExportDestinationType = ExportDestinationType.DiskFile
+                    .ExportFormatType = ExportFormatType.PortableDocFormat
+                    .DestinationOptions = CrDiskFileDestinationOptions
+                    .FormatOptions = CrFormatTypeOptions
+                End With
+                report.Export()
+
+                'sendMail(tbl.Rows(k)(4).ToString, "TERMINAL REPORTS ", " Find below attached Terminal REPORT", pdfFile)
+                'Sendsmsmessage("OlpRclJkOFBpUTZadVI5WWE=", "CTK School", tbl.Rows(k)(3).ToString, "The terminal Report for the academic Term has been sent to you By mail")
+                report.Close()
+                report.Dispose()
+            Next
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
