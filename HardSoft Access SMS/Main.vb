@@ -8,10 +8,31 @@ Public Class Main
     'Dim cryRpt As New ReportDocument
     'Dim pdfFile As String = "K:\Users\KISSI\Desktop\avareport.pdf"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        For Each row As DataGridViewRow In DataGridView1.Rows
-            Sendsmsmessage("OlpRclJkOFBpUTZadVI5WWE=", "CTK School", row.Cells(3).Value, txtGeneralMsg.Text)
-        Next
-        MsgBox("Sucess")
+
+        Panel2.Hide()
+        If txtGeneralMsg.Text = "" Then
+            MsgBox("Kindly type in message")
+            Exit Sub
+        End If
+        If CheckForInternetConnection() = True Then
+            ProgressBar1.Maximum = DataGridView1.Rows.Count - 1
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                'Panel2.Visible = True
+                Panel2.Show()
+                Sendsmsmessage("U2xUcFVwVVdKZmxJQnhyTllWYWs", "PPS MADINA", row.Cells(3).Value, txtGeneralMsg.Text)
+
+                lblsent.Text = row.Index.ToString
+                lblrem.Text = DataGridView1.Rows.Count - 1 - row.Index.ToString
+                ProgressBar1.Value = Val(row.Index.ToString)
+            Next
+        Else
+            MsgBox("NO INTERNET CONNECTION. KINDLY CONNECT TO THE INTERNET TO CONTINUE")
+            Exit Sub
+        End If
+
+        Panel2.Hide()
+        'Panel2.Visible = False
+        MsgBox("Message Sucessfully sent")
     End Sub
 
     Private Sub cbClassGeneral_MouseEnter(sender As Object, e As EventArgs) Handles cbClassGeneral.MouseEnter
@@ -21,7 +42,8 @@ Public Class Main
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO FROM usystbSchAdmissionDATA where hometelno <> '" + "" + "'", DataGridView1)
         Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE>0 and hometelno <> '" + "" + "' ", DataGridView2)
-        Display("SELECT STUDID,STUDNAME,CLASS,Amount,BalBFwd,BalCFwd,DATE,PayMode FROM usystbSchReceiptsPosted  ", DataGridView3)
+        Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE>0 and hometelno <> '" + "" + "' ", DataGridView4)
+        Display("SELECT STUDID,STUDNAME,CLASS,totamtpaid,BalBFwd,BalCFwd,DATE,PayMode,ReceiptNo,HomeTelNo,Bankname,Narration FROM tbSchSmS_ReceiptPRINTED  ", DataGridView3)
         'Display("SELECT STUDID,STUDNAME,CLASS,Amount,BalBFwd,BalCFwd,DATE,PayMode FROM  usystbSchTerminalDataSHEET ", DataGridView3)
     End Sub
 
@@ -98,56 +120,118 @@ Public Class Main
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
-            If con.State = ConnectionState.Closed Then
-                con.Open()
+            If ComboBox1.SelectedIndex = 0 Or ComboBox1.SelectedIndex = 1 Then
+                If con.State = ConnectionState.Closed Then
+                    con.Open()
+                End If
+                'email=39
+                'Dim query = "SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,EmailAddress FROM usystbSchAdmissionDATA "
+                Dim query = "SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,EmailAddress FROM usystbSchAdmissionDATA where course='" + ComboBox1.Text + "' "
+                'where Emailaddress<>'" + "" + "' 
+                cmd = New OleDb.OleDbCommand(query, con)
+                da = New OleDb.OleDbDataAdapter(cmd)
+                tbl = New DataTable()
+                da.Fill(tbl)
+
+
+                For k = 0 To tbl.Rows.Count - 1
+                    Dim quer = "select * from tbSchBillingTRANX where studno='" + tbl.Rows(k)(0).ToString + "' "
+                    cmd = New OleDb.OleDbCommand(quer, con)
+                    dt.Tables("TerminalBill").Rows.Clear()
+                    da.SelectCommand = cmd
+                    da.Fill(dt, "TerminalBill")
+
+
+                    'Dim sql = "select * from ClientReg"
+                    'dt.Tables("ClientReg").Rows.Clear()
+                    'cmd = New SqlCommand(sql, FleetCon)
+                    'da.SelectCommand = cmd
+                    'da.Fill(dt, "ClientReg")
+
+                    Dim report As New rptTerminalBill
+                    report.SetDataSource(dt)
+                    CrystalReportViewer2.ReportSource = report
+                    CrystalReportViewer2.Refresh()
+
+                    Dim pdfFile As String = "K:\Users\KISSI\Desktop\New folder\" + ComboBox1.Text + "\" + tbl.Rows(k)(1).ToString + " Terminal Bill" + ".pdf"
+
+                    Dim CrExportOptions As ExportOptions
+                    Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
+                    Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions
+                    CrDiskFileDestinationOptions.DiskFileName = pdfFile
+                    CrExportOptions = report.ExportOptions
+                    With CrExportOptions
+                        .ExportDestinationType = ExportDestinationType.DiskFile
+                        .ExportFormatType = ExportFormatType.PortableDocFormat
+                        .DestinationOptions = CrDiskFileDestinationOptions
+                        .FormatOptions = CrFormatTypeOptions
+                    End With
+                    report.Export()
+                    'If CheckForInternetConnection() = True Then
+                    '    sendMail(tbl.Rows(k)(4).ToString, "TERMINAL BILLS ", " Find below attached Terminal Bill", pdfFile)
+                    '    Sendsmsmessage("OlpRclJkOFBpUTZadVI5WWE=", "CTK School", tbl.Rows(k)(3).ToString, "The terminal Bill for the academic year has been sent to you By mail")
+                    'End If
+
+                    report.Close()
+                    report.Dispose()
+                Next
             End If
-            'email=39
-            Dim query = "SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,EmailAddress FROM usystbSchAdmissionDATA where Emailaddress<>'" + "" + "' "
-            cmd = New OleDb.OleDbCommand(query, con)
-            da = New OleDb.OleDbDataAdapter(cmd)
-            tbl = New DataTable()
-            da.Fill(tbl)
-            con.Close()
-
-            For k = 0 To tbl.Rows.Count - 1
-                Dim quer = "select * from tbSchBillingTRANX where studno='" + tbl.Rows(k)(0).ToString + "' "
-                cmd = New OleDb.OleDbCommand(quer, con)
-                dt.Tables("TerminalBill").Rows.Clear()
-                da.SelectCommand = cmd
-                da.Fill(dt, "TerminalBill")
+            If ComboBox1.SelectedIndex = 2 Then
+                If con.State = ConnectionState.Closed Then
+                    con.Open()
+                End If
+                'email=39
+                'Dim query = "SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,EmailAddress FROM usystbSchAdmissionDATA "
+                Dim query = "SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,EmailAddress FROM usystbSchAdmissionDATA where course='" + ComboBox1.Text + "' "
+                'where Emailaddress<>'" + "" + "' 
+                cmd = New OleDb.OleDbCommand(query, con)
+                da = New OleDb.OleDbDataAdapter(cmd)
+                tbl = New DataTable()
+                da.Fill(tbl)
 
 
-                'Dim sql = "select * from ClientReg"
-                'dt.Tables("ClientReg").Rows.Clear()
-                'cmd = New SqlCommand(sql, FleetCon)
-                'da.SelectCommand = cmd
-                'da.Fill(dt, "ClientReg")
+                For k = 0 To tbl.Rows.Count - 1
+                    Dim quer = "select * from tbSchBillingTRANX_SemesteR where studno='" + tbl.Rows(k)(0).ToString + "' "
+                    cmd = New OleDb.OleDbCommand(quer, con)
+                    dt.Tables("TerminalBill").Rows.Clear()
+                    da.SelectCommand = cmd
+                    da.Fill(dt, "TerminalBill")
 
-                Dim report As New rptTerminalBill
-                report.SetDataSource(dt)
-                CrystalReportViewer2.ReportSource = report
-                CrystalReportViewer2.Refresh()
 
-                Dim pdfFile As String = "K:\Users\KISSI\Desktop\" + tbl.Rows(k)(1).ToString + "Terminal Bill" + ".pdf"
+                    'Dim sql = "select * from ClientReg"
+                    'dt.Tables("ClientReg").Rows.Clear()
+                    'cmd = New SqlCommand(sql, FleetCon)
+                    'da.SelectCommand = cmd
+                    'da.Fill(dt, "ClientReg")
 
-                Dim CrExportOptions As ExportOptions
-                Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
-                Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions
-                CrDiskFileDestinationOptions.DiskFileName = pdfFile
-                CrExportOptions = report.ExportOptions
-                With CrExportOptions
-                    .ExportDestinationType = ExportDestinationType.DiskFile
-                    .ExportFormatType = ExportFormatType.PortableDocFormat
-                    .DestinationOptions = CrDiskFileDestinationOptions
-                    .FormatOptions = CrFormatTypeOptions
-                End With
-                report.Export()
+                    Dim report As New rptTerminalBill
+                    report.SetDataSource(dt)
+                    CrystalReportViewer2.ReportSource = report
+                    CrystalReportViewer2.Refresh()
 
-                sendMail(tbl.Rows(k)(4).ToString, "TERMINAL BILLS ", " Find below attached Terminal Bill", pdfFile)
-                Sendsmsmessage("OlpRclJkOFBpUTZadVI5WWE=", "CTK School", tbl.Rows(k)(3).ToString, "The terminal Bill for the academic year has been sent to you By mail")
-                report.Close()
-                report.Dispose()
-            Next
+                    Dim pdfFile As String = "K:\Users\KISSI\Desktop\New folder\" + ComboBox1.Text + "\" + tbl.Rows(k)(1).ToString + " Terminal Bill" + ".pdf"
+
+                    Dim CrExportOptions As ExportOptions
+                    Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
+                    Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions
+                    CrDiskFileDestinationOptions.DiskFileName = pdfFile
+                    CrExportOptions = report.ExportOptions
+                    With CrExportOptions
+                        .ExportDestinationType = ExportDestinationType.DiskFile
+                        .ExportFormatType = ExportFormatType.PortableDocFormat
+                        .DestinationOptions = CrDiskFileDestinationOptions
+                        .FormatOptions = CrFormatTypeOptions
+                    End With
+                    report.Export()
+                    'If CheckForInternetConnection() = True Then
+                    '    sendMail(tbl.Rows(k)(4).ToString, "TERMINAL BILLS ", " Find below attached Terminal Bill", pdfFile)
+                    '    Sendsmsmessage("OlpRclJkOFBpUTZadVI5WWE=", "CTK School", tbl.Rows(k)(3).ToString, "The terminal Bill for the academic year has been sent to you By mail")
+                    'End If
+
+                    report.Close()
+                    report.Dispose()
+                Next
+            End If
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
@@ -171,30 +255,125 @@ Public Class Main
             MsgBox(ex.ToString)
         End Try
     End Sub
-    Public Sub Sendsmsmessage(ByVal smskey As String, ByVal from As String, ByVal recipient As String, ByVal body As String)
-        Dim apikey = smskey
-        Dim message = body
-        Dim numbers = recipient
-        Dim strGet As String
-        Dim sender = from
-        Dim url As String = "https://sms.arkesel.com/sms/api?action=send-sms"
-        strGet = url + "&api_key=" + apikey + "&to=" + numbers + "&from=" + sender + "&sms=" + WebUtility.UrlEncode(message)
-        Dim webclient As New System.Net.WebClient
-        Dim result As String = webclient.DownloadString(strGet)
-        MessageBox.Show(result)
-    End Sub
+
 
     Private Sub cbclassgeneral_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbclassgeneral.SelectedIndexChanged
 
     End Sub
 
     Private Sub txtamt_TextChanged(sender As Object, e As EventArgs) Handles txtamt.TextChanged
-        If cbsign.SelectedIndex = -1 Then
-            MsgBox("Kindly select Sign operator")
-            cbsign.Focus()
-        End If
-        If txtamt.Text <> "" Or cbsign.SelectedIndex <> -1 Then
+
+        If txtamt.Text <> "" And cbsign.SelectedIndex <> -1 Then
             Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE " + cbsign.Text + "" + txtamt.Text + " and hometelno <> '" + "" + "' ", DataGridView2)
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE " + cbsign.Text + "" + txtamt.Text + " and hometelno <> '" + "" + "' ", DataGridView4)
+        Else
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA where hometelno <> '" + "" + "'", DataGridView2)
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA where hometelno <> '" + "" + "'", DataGridView4)
         End If
+    End Sub
+
+    Private Sub cbsign_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbsign.SelectedIndexChanged
+
+        If txtamt.Text <> "" And cbsign.SelectedIndex <> -1 Then
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE " + cbsign.Text + "" + txtamt.Text + " and hometelno <> '" + "" + "' ", DataGridView2)
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE " + cbsign.Text + "" + txtamt.Text + " and hometelno <> '" + "" + "' ", DataGridView4)
+        Else
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA where hometelno <> '" + "" + "'", DataGridView2)
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA where hometelno <> '" + "" + "'", DataGridView4)
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Panel2.Hide()
+        If txtReminder.Text = "" Then
+            MsgBox("Kindly type in message")
+            Exit Sub
+        End If
+        If CheckForInternetConnection() = True Then
+            Dim i As Integer = -1
+            For Each row As DataGridViewRow In DataGridView2.Rows
+                'MsgBox(row.Index.ToString)
+                If i <> DataGridView1.Rows.Count Then
+                    DataGridView4.Rows.RemoveAt(i + 1)
+                End If
+
+                Panel3.Show()
+                'Sendsmsmessage("U2xUcFVwVVdKZmxJQnhyTllWYWs", "PPS MADINA", row.Cells(3).Value, "School FEES Reminder" + vbNewLine + "Student ID:" + " " + row.Cells(0).Value & vbNewLine + "Student Name:" + vbNewLine + row.Cells(1).Value + vbNewLine + "Student Class:" + " " + row.Cells(2).Value + vbNewLine + "Current Balance:" + " GHC " & row.Cells(4).Value & vbNewLine + "NOTE: " + vbNewLine + txtReminder.Text)
+
+                Label5.Text = row.Index.ToString
+                Label4.Text = DataGridView2.Rows.Count - 1 - row.Index.ToString
+                ProgressBar2.Maximum = DataGridView2.Rows.Count - 1
+                ProgressBar2.Value = Val(row.Index.ToString)
+
+                DataGridView2.DataSource = DataGridView4
+            Next
+            Panel3.Hide()
+            'Panel2.Visible = False
+            MsgBox("Sucess")
+
+        Else
+            MsgBox("NO INTERNET CONNECTION. KINDLY CONNECT TO THE INTERNET TO CONTINUE")
+            Exit Sub
+        End If
+
+
+    End Sub
+
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs)
+        Try
+            'Dim pdate As Date = CDate(DateTimePicker1.Value)
+            'MsgBox(DateTimePicker1.Value)
+            Display("SELECT STUDID,STUDNAME,CLASS,Amount,BalBFwd,BalCFwd,DATE,PayMode FROM usystbSchReceiptsPosted  WHERE date=12/11/2021  ", DataGridView3)
+            '" & DateTimePicker1.Value & "
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Panel4.Hide()
+        If DataGridView3.Rows.Count <> 0 Then
+            If CheckForInternetConnection() = True Then
+                Dim i As Integer = -1
+                For Each row As DataGridViewRow In DataGridView3.Rows
+                    'MsgBox(row.Index.ToString)
+                    'If i <> DataGridView1.Rows.Count Then
+                    '    DataGridView3.Rows.RemoveAt(i + 1)
+                    'End If
+
+                    Panel4.Show()
+                    Sendsmsmessage("U2xUcFVwVVdKZmxJQnhyTllWYWs", "PPS MADINA", row.Cells(9).Value, "PAYMENT RECEIPT" + vbNewLine + "" + row.Cells(1).Value + vbNewLine + "Stud. ID:" + " " + row.Cells(0).Value & vbNewLine + "Class:" + " " + row.Cells(2).Value + vbNewLine + "--------------------" + vbNewLine + "Date:" + " " & row.Cells(6).Value & vbNewLine + "Receipt No:" + " " & row.Cells(8).Value & vbNewLine + "Bal. B/Fwd:" + " GHC " & row.Cells(4).Value & vbNewLine + "Amount Paid:" + " GHC " & row.Cells(3).Value & vbNewLine + "Bal. Payable:" + " GHC " & row.Cells(5).Value & vbNewLine + "----------------" + vbNewLine + "Bank Name: " + row.Cells(10).Value + vbNewLine + "Narration: " & row.Cells(11).Value)
+
+                    Label10.Text = row.Index.ToString
+                    Label9.Text = DataGridView3.Rows.Count - 1 - row.Index.ToString
+                    ProgressBar3.Maximum = DataGridView3.Rows.Count - 1
+                    ProgressBar3.Value = Val(row.Index.ToString)
+
+                    Insert("delete from tbSchSmS_ReceiptPRINTED where receiptno='" + row.Cells(8).Value + "'")
+
+
+
+                    'DataGridView2.DataSource = DataGridView4
+                Next
+                Display("SELECT STUDID,STUDNAME,CLASS,totamtpaid,BalBFwd,BalCFwd,DATE,PayMode,ReceiptNo,HomeTelNo FROM tbSchSmS_ReceiptPRINTED  ", DataGridView3)
+                Panel4.Hide()
+                'Panel2.Visible = False
+                MsgBox("Sucess")
+
+            Else
+                MsgBox("NO INTERNET CONNECTION. KINDLY CONNECT TO THE INTERNET TO CONTINUE")
+                Exit Sub
+            End If
+        End If
+
+    End Sub
+
+    Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Panel2.Hide()
+        Panel3.Hide()
+        Panel4.Hide()
+        Panel5.Hide()
+
     End Sub
 End Class

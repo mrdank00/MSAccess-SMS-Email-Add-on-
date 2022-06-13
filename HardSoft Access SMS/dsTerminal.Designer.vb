@@ -1832,11 +1832,11 @@ Partial Public Class dsTerminal
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Overloads Function AddTerminalBillRow( _
                     ByVal MajorSeqNo As String,  _
-                    ByVal _Date As String,  _
+                    ByVal _Date As Date,  _
                     ByVal StudNo As String,  _
                     ByVal StudName As String,  _
-                    ByVal BillAmt As String,  _
-                    ByVal Payments As String,  _
+                    ByVal BillAmt As Decimal,  _
+                    ByVal Payments As Decimal,  _
                     ByVal Course As String,  _
                     ByVal Category As String,  _
                     ByVal BillGroup As String,  _
@@ -1846,8 +1846,8 @@ Partial Public Class dsTerminal
                     ByVal BillType As String,  _
                     ByVal Sex As String,  _
                     ByVal Narration As String,  _
-                    ByVal StartDate As String,  _
-                    ByVal EndDate As String,  _
+                    ByVal StartDate As Date,  _
+                    ByVal EndDate As Date,  _
                     ByVal _Class As String,  _
                     ByVal Section As String,  _
                     ByVal Term As String,  _
@@ -1972,7 +1972,7 @@ Partial Public Class dsTerminal
         Private Sub InitClass()
             Me.columnMajorSeqNo = New Global.System.Data.DataColumn("MajorSeqNo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnMajorSeqNo)
-            Me.columnDate = New Global.System.Data.DataColumn("Date", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnDate = New Global.System.Data.DataColumn("Date", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             Me.columnDate.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "DateColumn")
             Me.columnDate.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnDate")
             Me.columnDate.ExtendedProperties.Add("Generator_UserColumnName", "Date")
@@ -1981,9 +1981,9 @@ Partial Public Class dsTerminal
             MyBase.Columns.Add(Me.columnStudNo)
             Me.columnStudName = New Global.System.Data.DataColumn("StudName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnStudName)
-            Me.columnBillAmt = New Global.System.Data.DataColumn("BillAmt", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnBillAmt = New Global.System.Data.DataColumn("BillAmt", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnBillAmt)
-            Me.columnPayments = New Global.System.Data.DataColumn("Payments", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnPayments = New Global.System.Data.DataColumn("Payments", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPayments)
             Me.columnCourse = New Global.System.Data.DataColumn("Course", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCourse)
@@ -2003,9 +2003,9 @@ Partial Public Class dsTerminal
             MyBase.Columns.Add(Me.columnSex)
             Me.columnNarration = New Global.System.Data.DataColumn("Narration", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNarration)
-            Me.columnStartDate = New Global.System.Data.DataColumn("StartDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnStartDate = New Global.System.Data.DataColumn("StartDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnStartDate)
-            Me.columnEndDate = New Global.System.Data.DataColumn("EndDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnEndDate = New Global.System.Data.DataColumn("EndDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnEndDate)
             Me.columnClass = New Global.System.Data.DataColumn("Class", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             Me.columnClass.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "ClassColumn")
@@ -4518,10 +4518,10 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property _Date() As String
+        Public Property _Date() As Date
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalBill.DateColumn),String)
+                    Return CType(Me(Me.tableTerminalBill.DateColumn),Date)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Date' in table 'TerminalBill' is DBNull.", e)
                 End Try
@@ -4563,10 +4563,10 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property BillAmt() As String
+        Public Property BillAmt() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalBill.BillAmtColumn),String)
+                    Return CType(Me(Me.tableTerminalBill.BillAmtColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'BillAmt' in table 'TerminalBill' is DBNull.", e)
                 End Try
@@ -4578,10 +4578,10 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Payments() As String
+        Public Property Payments() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalBill.PaymentsColumn),String)
+                    Return CType(Me(Me.tableTerminalBill.PaymentsColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Payments' in table 'TerminalBill' is DBNull.", e)
                 End Try
@@ -4728,10 +4728,10 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property StartDate() As String
+        Public Property StartDate() As Date
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalBill.StartDateColumn),String)
+                    Return CType(Me(Me.tableTerminalBill.StartDateColumn),Date)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'StartDate' in table 'TerminalBill' is DBNull.", e)
                 End Try
@@ -4743,10 +4743,10 @@ Partial Public Class dsTerminal
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property EndDate() As String
+        Public Property EndDate() As Date
             Get
                 Try 
-                    Return CType(Me(Me.tableTerminalBill.EndDateColumn),String)
+                    Return CType(Me(Me.tableTerminalBill.EndDateColumn),Date)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'EndDate' in table 'TerminalBill' is DBNull.", e)
                 End Try

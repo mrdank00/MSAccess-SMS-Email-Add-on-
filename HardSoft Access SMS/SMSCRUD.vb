@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.Net
 Imports CrystalDecisions.CrystalReports.Engine
 Module SMSCRUD
     Public result As String
@@ -101,4 +102,37 @@ Module SMSCRUD
     '        MsgBox(ex.ToString)
     '    End Try
     'End Sub
+    Public Sub checkbalance(ByVal smskey As String)
+        Dim apikey = smskey
+        ' Dim strGet As String
+        Dim urlc As String = "https://sms.arkesel.com/sms/api?action=check-balance&api_key='" + apikey + "'&response=json"
+
+        ' strGet = urlc
+        Dim webclient As New System.Net.WebClient
+        Dim result As String = webclient.DownloadString(urlc)
+        MessageBox.Show(result)
+    End Sub
+    Public Function CheckForInternetConnection() As Boolean
+        Try
+            Using client = New WebClient()
+                Using stream = client.OpenRead("http://www.google.com")
+                    Return True
+                End Using
+            End Using
+        Catch
+            Return False
+        End Try
+    End Function
+    Public Sub Sendsmsmessage(ByVal smskey As String, ByVal from As String, ByVal recipient As String, ByVal body As String)
+        Dim apikey = smskey
+        Dim message = body
+        Dim numbers = recipient
+        Dim strGet As String
+        Dim sender = from
+        Dim url As String = "https://sms.arkesel.com/sms/api?action=send-sms"
+        strGet = url + "&api_key=" + apikey + "&to=" + numbers + "&from=" + sender + "&sms=" + WebUtility.UrlEncode(message)
+        Dim webclient As New System.Net.WebClient
+        Dim result As String = webclient.DownloadString(strGet)
+        MessageBox.Show(result)
+    End Sub
 End Module

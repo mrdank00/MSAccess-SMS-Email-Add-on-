@@ -91,6 +91,12 @@
     <Compile Include="dsTerminal.vb">
       <DependentUpon>dsTerminal.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Loader.Designer.vb">
+      <DependentUpon>Loader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Loader.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     <Compile Include="SMSCRUD.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Loader.resx">
+      <DependentUpon>Loader.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
