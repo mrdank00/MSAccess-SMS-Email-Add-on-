@@ -174,8 +174,8 @@ Partial Class Main
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
+        Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(1, 51)
         Me.TabControl1.Name = "TabControl1"
@@ -185,6 +185,7 @@ Partial Class Main
         '
         'TabPage2
         '
+        Me.TabPage2.BackColor = System.Drawing.Color.WhiteSmoke
         Me.TabPage2.Controls.Add(Me.Panel10)
         Me.TabPage2.Controls.Add(Me.Button8)
         Me.TabPage2.Controls.Add(Me.Panel2)
@@ -199,7 +200,6 @@ Partial Class Main
         Me.TabPage2.Size = New System.Drawing.Size(817, 348)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "General Message"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'Panel10
         '
@@ -857,7 +857,7 @@ Partial Class Main
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage7.Size = New System.Drawing.Size(817, 348)
         Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Terminal Bill"
+        Me.TabPage7.Text = "Terminal Bill (sms)"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
         'Panel14

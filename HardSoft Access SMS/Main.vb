@@ -26,6 +26,10 @@ Public Class Main
                     lblrem.Text = DataGridView1.Rows.Count - 1 - row.Index.ToString
                     ProgressBar1.Value = Val(row.Index.ToString)
                 Next
+                txtGeneralMsg.Text = ""
+                Panel2.Hide()
+                'Panel2.Visible = False
+                MsgBox("Message Sucessfully sent")
                 checkbalance("U2xUcFVwVVdKZmxJQnhyTllWYWs", Label23)
                 Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO FROM usystbSchAdmissionDATA where hometelno <> '" + "" + "'", DataGridView1, Label25)
             Else
@@ -33,9 +37,7 @@ Public Class Main
                 Exit Sub
             End If
 
-            Panel2.Hide()
-            'Panel2.Visible = False
-            MsgBox("Message Sucessfully sent")
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -54,7 +56,7 @@ Public Class Main
         Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE>0 and hometelno <> '" + "" + "' ", DataGridView2, Label26)
         Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE>0 and hometelno <> '" + "" + "' ", DataGridView4, Label26)
         Display("SELECT STUDID,STUDNAME,CLASS,totamtpaid,BalBFwd,BalCFwd,DATE,PayMode,ReceiptNo,HomeTelNo,Bankname,Narration FROM tbSchSmS_ReceiptPRINTED where hometelno<>'" + "" + "' ", DataGridView3, Label28)
-        Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' ", DataGridView5, Label30)
+        Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance,currentterm  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' ", DataGridView5, Label30)
 
         'Display("SELECT STUDID,STUDNAME,CLASS,Amount,BalBFwd,BalCFwd,DATE,PayMode FROM  usystbSchTerminalDataSHEET ", DataGridView3)
     End Sub
@@ -320,6 +322,7 @@ Public Class Main
 
                     ' DataGridView2.DataSource = DataGridView4
                 Next
+                txtReminder.Text = ""
                 checkbalance("U2xUcFVwVVdKZmxJQnhyTllWYWs", Label23)
                 Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,BALANCE FROM usystbSchAdmissionDATA WHERE BALANCE>0 and hometelno <> '" + "" + "' ", DataGridView2, Label26)
                 Panel3.Hide()
@@ -398,7 +401,7 @@ Public Class Main
         Panel3.Hide()
         Panel4.Hide()
         Panel5.Hide()
-        onloads()
+
         'TabPage7.Hide()
     End Sub
 
@@ -415,6 +418,7 @@ Public Class Main
     End Sub
 
     Private Sub TabControl1_Enter(sender As Object, e As EventArgs) Handles TabControl1.Enter
+        onloads()
         checkbalance("U2xUcFVwVVdKZmxJQnhyTllWYWs", Label23)
     End Sub
 
@@ -431,7 +435,7 @@ Public Class Main
                         'End If
 
                         Panel5.Show()
-                        Sendsmsmessage("U2xUcFVwVVdKZmxJQnhyTllWYWs", "PPS MADINA", row.Cells(3).Value, "TERMINAL BILL" + vbNewLine + "" + row.Cells(1).Value + vbNewLine + "Stud. ID:" + " " + row.Cells(0).Value & vbNewLine + "Class:" + " " + row.Cells(2).Value + vbNewLine + "--------------------" + vbNewLine + "Arrears:" + " GHC" & row.Cells(4).Value & vbNewLine + "Current Term Bill:" + " GHC " & row.Cells(5).Value & vbNewLine + "Balance:" + " GHC " & row.Cells(6).Value & vbNewLine)
+                        Sendsmsmessage("U2xUcFVwVVdKZmxJQnhyTllWYWs", "PPS MADINA", row.Cells(3).Value, "TERMINAL BILL" + vbNewLine + "" + row.Cells(1).Value + vbNewLine + "Stud. ID:" + " " + row.Cells(0).Value & vbNewLine + "Class:" + " " + row.Cells(2).Value + vbNewLine + "--------------------" + vbNewLine + "Arrears:" + " Ghc " & row.Cells(4).Value & vbNewLine + "Current Term Bill:" + " Ghc " & row.Cells(5).Value & vbNewLine + "Balance:" + " Ghc " & row.Cells(6).Value & vbNewLine + "Bill Term : " + row.Cells(7).Value)
 
                         Label15.Text = row.Index.ToString
                         Label14.Text = DataGridView5.Rows.Count - 1 - row.Index.ToString
@@ -443,7 +447,7 @@ Public Class Main
 
                     Panel5.Hide()
                     'Panel2.Visible = False
-                    MsgBox("Sucess")
+                    MsgBox("Messages Sucessfully Sent")
 
                 Else
                     MsgBox("NO INTERNET CONNECTION. KINDLY CONNECT TO THE INTERNET TO CONTINUE")
@@ -461,13 +465,17 @@ Public Class Main
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         If ComboBox2.SelectedIndex <> -1 Then
-            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' and presentclass='" + ComboBox2.Text + "' ", DataGridView5, Label30)
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance,currentterm  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' and presentclass='" + ComboBox2.Text + "' ", DataGridView5, Label30)
         End If
     End Sub
 
     Private Sub ComboBox2_TextUpdate(sender As Object, e As EventArgs) Handles ComboBox2.TextUpdate
         If ComboBox2.Text = "" Then
-            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' ", DataGridView5, Label30)
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance,currentterm  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' ", DataGridView5, Label30)
         End If
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+        Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance,currentterm  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' ", DataGridView5, Label30)
     End Sub
 End Class

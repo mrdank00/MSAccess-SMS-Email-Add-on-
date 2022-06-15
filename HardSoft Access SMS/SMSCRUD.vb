@@ -168,7 +168,7 @@ Module SMSCRUD
         strGet = url + "&api_key=" + apikey + "&to=" + numbers + "&from=" + sender + "&sms=" + WebUtility.UrlEncode(message)
         Dim webclient As New System.Net.WebClient
         Dim result As String = webclient.DownloadString(strGet)
-        MessageBox.Show(result)
+        'MessageBox.Show(result)
     End Sub
     Class Program
         Shared Function Main(ByVal args As String()) As Integer
