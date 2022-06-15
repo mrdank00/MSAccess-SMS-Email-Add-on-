@@ -85,10 +85,9 @@ Partial Class Main
         Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.CrystalReportViewer2 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Panel14 = New System.Windows.Forms.Panel()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -98,12 +97,13 @@ Partial Class Main
         Me.ProgressBar4 = New System.Windows.Forms.ProgressBar()
         Me.DataGridView5 = New System.Windows.Forms.DataGridView()
         Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
-        Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.CrystalReportViewer2 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -124,11 +124,11 @@ Partial Class Main
         Me.Panel8.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.TabPage7.SuspendLayout()
-        Me.Panel9.SuspendLayout()
+        Me.Panel14.SuspendLayout()
         Me.Panel5.SuspendLayout()
         CType(Me.DataGridView5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel13.SuspendLayout()
-        Me.Panel14.SuspendLayout()
+        Me.Panel9.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -860,50 +860,40 @@ Partial Class Main
         Me.TabPage7.Text = "Terminal Bill"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'Panel14
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Nur-kg", "class1-5", "Class6-Jhs3"})
-        Me.ComboBox1.Location = New System.Drawing.Point(17, 11)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(70, 25)
-        Me.ComboBox1.TabIndex = 4
-        '
-        'CrystalReportViewer2
-        '
-        Me.CrystalReportViewer2.ActiveViewIndex = -1
-        Me.CrystalReportViewer2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.Panel14.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CrystalReportViewer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CrystalReportViewer2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.CrystalReportViewer2.Location = New System.Drawing.Point(616, 71)
-        Me.CrystalReportViewer2.Name = "CrystalReportViewer2"
-        Me.CrystalReportViewer2.Size = New System.Drawing.Size(162, 112)
-        Me.CrystalReportViewer2.TabIndex = 0
-        Me.CrystalReportViewer2.Visible = False
+        Me.Panel14.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.Panel14.Controls.Add(Me.Label30)
+        Me.Panel14.Controls.Add(Me.Label31)
+        Me.Panel14.Location = New System.Drawing.Point(20, 310)
+        Me.Panel14.Name = "Panel14"
+        Me.Panel14.Size = New System.Drawing.Size(776, 36)
+        Me.Panel14.TabIndex = 15
         '
-        'Panel9
+        'Label30
         '
-        Me.Panel9.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.Panel9.Controls.Add(Me.ComboBox1)
-        Me.Panel9.Controls.Add(Me.Button3)
-        Me.Panel9.Location = New System.Drawing.Point(563, 6)
-        Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(227, 59)
-        Me.Panel9.TabIndex = 11
-        Me.Panel9.Visible = False
+        Me.Label30.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Segoe UI Black", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.ForeColor = System.Drawing.Color.White
+        Me.Label30.Location = New System.Drawing.Point(580, 2)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(26, 30)
+        Me.Label30.TabIndex = 9
+        Me.Label30.Text = "0"
         '
-        'Button3
+        'Label31
         '
-        Me.Button3.Location = New System.Drawing.Point(108, 11)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(110, 23)
-        Me.Button3.TabIndex = 3
-        Me.Button3.Text = "Process"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Label31.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label31.AutoSize = True
+        Me.Label31.ForeColor = System.Drawing.Color.White
+        Me.Label31.Location = New System.Drawing.Point(452, 9)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(123, 17)
+        Me.Label31.TabIndex = 8
+        Me.Label31.Text = "NO of Receipients:"
         '
         'Panel5
         '
@@ -1010,6 +1000,14 @@ Partial Class Main
         Me.Panel13.Size = New System.Drawing.Size(765, 74)
         Me.Panel13.TabIndex = 14
         '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(16, 25)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(136, 25)
+        Me.ComboBox2.TabIndex = 10
+        '
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1032,51 +1030,53 @@ Partial Class Main
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(423, 40)
         Me.Button10.TabIndex = 3
-        Me.Button10.Text = "Process"
+        Me.Button10.Text = "Process and  Send"
         Me.Button10.UseVisualStyleBackColor = False
         '
-        'Panel14
+        'CrystalReportViewer2
         '
-        Me.Panel14.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.CrystalReportViewer2.ActiveViewIndex = -1
+        Me.CrystalReportViewer2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel14.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.Panel14.Controls.Add(Me.Label30)
-        Me.Panel14.Controls.Add(Me.Label31)
-        Me.Panel14.Location = New System.Drawing.Point(20, 310)
-        Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(776, 36)
-        Me.Panel14.TabIndex = 15
+        Me.CrystalReportViewer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.CrystalReportViewer2.Cursor = System.Windows.Forms.Cursors.Default
+        Me.CrystalReportViewer2.Location = New System.Drawing.Point(616, 71)
+        Me.CrystalReportViewer2.Name = "CrystalReportViewer2"
+        Me.CrystalReportViewer2.Size = New System.Drawing.Size(162, 112)
+        Me.CrystalReportViewer2.TabIndex = 0
+        Me.CrystalReportViewer2.Visible = False
         '
-        'Label30
+        'Panel9
         '
-        Me.Label30.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Segoe UI Black", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.ForeColor = System.Drawing.Color.White
-        Me.Label30.Location = New System.Drawing.Point(580, 2)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(26, 30)
-        Me.Label30.TabIndex = 9
-        Me.Label30.Text = "0"
+        Me.Panel9.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.Panel9.Controls.Add(Me.ComboBox1)
+        Me.Panel9.Controls.Add(Me.Button3)
+        Me.Panel9.Location = New System.Drawing.Point(563, 6)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(227, 59)
+        Me.Panel9.TabIndex = 11
+        Me.Panel9.Visible = False
         '
-        'Label31
+        'ComboBox1
         '
-        Me.Label31.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label31.AutoSize = True
-        Me.Label31.ForeColor = System.Drawing.Color.White
-        Me.Label31.Location = New System.Drawing.Point(452, 9)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(123, 17)
-        Me.Label31.TabIndex = 8
-        Me.Label31.Text = "NO of Receipients:"
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Nur-kg", "class1-5", "Class6-Jhs3"})
+        Me.ComboBox1.Location = New System.Drawing.Point(17, 11)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(70, 25)
+        Me.ComboBox1.TabIndex = 4
         '
-        'ComboBox2
+        'Button3
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(16, 25)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(136, 25)
-        Me.ComboBox2.TabIndex = 10
+        Me.Button3.Location = New System.Drawing.Point(108, 11)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(110, 23)
+        Me.Button3.TabIndex = 3
+        Me.Button3.Text = "Process"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'Main
         '
@@ -1119,13 +1119,13 @@ Partial Class Main
         Me.Panel8.ResumeLayout(False)
         Me.TabPage6.ResumeLayout(False)
         Me.TabPage7.ResumeLayout(False)
-        Me.Panel9.ResumeLayout(False)
+        Me.Panel14.ResumeLayout(False)
+        Me.Panel14.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         CType(Me.DataGridView5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel13.ResumeLayout(False)
-        Me.Panel14.ResumeLayout(False)
-        Me.Panel14.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

@@ -420,7 +420,7 @@ Public Class Main
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Try
-            Panel4.Hide()
+            Panel5.Hide()
             If DataGridView5.Rows.Count <> 0 Then
                 If CheckForInternetConnection() = True Then
                     Dim i As Integer = -1
@@ -430,19 +430,18 @@ Public Class Main
                         '    DataGridView3.Rows.RemoveAt(i + 1)
                         'End If
 
-                        Panel4.Show()
+                        Panel5.Show()
                         Sendsmsmessage("U2xUcFVwVVdKZmxJQnhyTllWYWs", "PPS MADINA", row.Cells(3).Value, "TERMINAL BILL" + vbNewLine + "" + row.Cells(1).Value + vbNewLine + "Stud. ID:" + " " + row.Cells(0).Value & vbNewLine + "Class:" + " " + row.Cells(2).Value + vbNewLine + "--------------------" + vbNewLine + "Arrears:" + " GHC" & row.Cells(4).Value & vbNewLine + "Current Term Bill:" + " GHC " & row.Cells(5).Value & vbNewLine + "Balance:" + " GHC " & row.Cells(6).Value & vbNewLine)
 
-                        Label10.Text = row.Index.ToString
-                        Label9.Text = DataGridView5.Rows.Count - 1 - row.Index.ToString
-                        ProgressBar3.Maximum = DataGridView5.Rows.Count - 1
-                        ProgressBar3.Value = Val(row.Index.ToString)
+                        Label15.Text = row.Index.ToString
+                        Label14.Text = DataGridView5.Rows.Count - 1 - row.Index.ToString
+                        ProgressBar4.Maximum = DataGridView5.Rows.Count - 1
+                        ProgressBar4.Value = Val(row.Index.ToString)
 
                     Next
                     checkbalance("U2xUcFVwVVdKZmxJQnhyTllWYWs", Label23)
-                    Display("SELECT STUDID,STUDNAME,CLASS,totamtpaid,BalBFwd,BalCFwd,DATE,PayMode,ReceiptNo,HomeTelNo,Bankname,Narration FROM tbSchSmS_ReceiptPRINTED where hometelno<>'" + "" + "' ", DataGridView3, Label28)
-                    Display("SELECT STUDID,STUDNAME,CLASS,totamtpaid,BalBFwd,BalCFwd,DATE,PayMode,ReceiptNo,HomeTelNo,Bankname,Narration FROM tbSchSmS_ReceiptPRINTED where hometelno<>'" + "" + "' ", DataGridView3, Label28)
-                    Panel4.Hide()
+
+                    Panel5.Hide()
                     'Panel2.Visible = False
                     MsgBox("Sucess")
 
@@ -454,5 +453,21 @@ Public Class Main
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub ComboBox2_MouseClick(sender As Object, e As MouseEventArgs) Handles ComboBox2.MouseClick
+        ComboFeed("SELECT * FROM tbSchClassID", ComboBox2, 2)
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+        If ComboBox2.SelectedIndex <> -1 Then
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' and presentclass='" + ComboBox2.Text + "' ", DataGridView5, Label30)
+        End If
+    End Sub
+
+    Private Sub ComboBox2_TextUpdate(sender As Object, e As EventArgs) Handles ComboBox2.TextUpdate
+        If ComboBox2.Text = "" Then
+            Display("SELECT STUDID,STUDNAME,PRESENTCLASS,HOMETELNO,arrears,currenttermbill,balance  FROM usystbSchAdmissionDATA where hometelno<>'" + "" + "' ", DataGridView5, Label30)
+        End If
     End Sub
 End Class
