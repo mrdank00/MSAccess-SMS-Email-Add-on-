@@ -1,6 +1,9 @@
 ﻿Imports System.Data.OleDb
 Imports System.Net
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Newtonsoft.Json
+Imports System.Text.RegularExpressions
+Imports System.Net.WebClient
 Module SMSCRUD
     Public result As String
     Public cmd As New OleDbCommand
@@ -37,7 +40,7 @@ Module SMSCRUD
         End Try
     End Sub
 
-    Public Sub Display(ByVal sql As String, dgv As DataGridView)
+    Public Sub Display(ByVal sql As String, dgv As DataGridView, lbl As Label)
         'Try
         If con.State = ConnectionState.Closed Then
             con.Open()
@@ -52,6 +55,7 @@ Module SMSCRUD
             da = New OleDbDataAdapter(cmd)
             da.Fill(tbl)
             dgv.DataSource = tbl
+            lbl.Text = dgv.Rows.Count
         End With
         con.Close()
         'Catch ex As Exception
@@ -102,16 +106,45 @@ Module SMSCRUD
     '        MsgBox(ex.ToString)
     '    End Try
     'End Sub
-    Public Sub checkbalance(ByVal smskey As String)
-        Dim apikey = smskey
-        ' Dim strGet As String
-        Dim urlc As String = "https://sms.arkesel.com/sms/api?action=check-balance&api_key='" + apikey + "'&response=json"
+    Public Sub checkbalance(ByVal smskey As String, lbl As Label)
+        If CheckForInternetConnection() = True Then
+            Dim apikey = smskey
+            Dim urlc As String = "https://sms.arkesel.com/sms/api?action=check-balance&api_key=" + apikey + "&response=json"
+            Dim webclient As New System.Net.WebClient
+            Dim result As String = webclient.DownloadString(urlc)
+            Dim mystring As String
+            mystring = JsonConvert.SerializeObject(result, Formatting.Indented)
 
-        ' strGet = urlc
-        Dim webclient As New System.Net.WebClient
-        Dim result As String = webclient.DownloadString(urlc)
-        MessageBox.Show(result)
+            lbl.Text = result
+
+            'Dim mytext As String = result
+            'Dim myChars() As Char = mytext.ToCharArray()
+            'For Each ch As Char In myChars
+            '    If Char.IsDigit(ch) Then
+            '        Dim arr As Integer() = {}
+            '        Dim newItem As String = ch
+
+            '        arr = arr.Concat({newItem}).ToArray
+
+            '        For index As Integer = 0 To arr.Length - 1
+            '            MsgBox($"index: {index}, value: {arr(index)}")
+            '        Next
+
+            '    End If
+            'Next
+            'Dim mytext As String = result
+            'Dim myChars() As Char = mytext.ToCharArray()
+            'For Each ch As Char In myChars
+            '    If Char.IsDigit(ch) Then
+
+            '        lbl.Text = ch
+            '    End If
+            'Next
+        End If
+
+
     End Sub
+
     Public Function CheckForInternetConnection() As Boolean
         Try
             Using client = New WebClient()
@@ -129,10 +162,32 @@ Module SMSCRUD
         Dim numbers = recipient
         Dim strGet As String
         Dim sender = from
+        'HttpWebRequest.Headers.Add("Header1", "Header1 value")
+        ' strGet = "https://smsc.hubtel.com/v1/messages/send?clientsecret=zbuugivo&clientid=kfetlmjz&from=Hardsoft&to=233242838080&content=This+Is+A+Test+Message"
         Dim url As String = "https://sms.arkesel.com/sms/api?action=send-sms"
         strGet = url + "&api_key=" + apikey + "&to=" + numbers + "&from=" + sender + "&sms=" + WebUtility.UrlEncode(message)
         Dim webclient As New System.Net.WebClient
         Dim result As String = webclient.DownloadString(strGet)
         MessageBox.Show(result)
     End Sub
+    Class Program
+        Shared Function Main(ByVal args As String()) As Integer
+            Dim array As Integer() = ExtractIntegers("animals|3|2|1|3")
+            For Each i In array
+                Console.WriteLine(i)
+            Next
+            Return 0
+        End Function
+        Shared Function ExtractIntegers(ByVal input As String) As Integer()
+            Dim pattern As String = "animals(\|(?<number>[0-9]+))*"
+            Dim match As Match = Regex.Match(input, pattern)
+            Dim list As New List(Of Integer)
+            If match.Success Then
+                For Each capture As Capture In match.Groups("number").Captures
+                    list.Add(Integer.Parse(capture.Value))
+                Next
+            End If
+            Return list.ToArray()
+        End Function
+    End Class
 End Module
